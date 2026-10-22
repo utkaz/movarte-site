@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#0B1B3F">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MovArt – Prateleira</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap">
+<style>
+:root{--bg:#EEF4FA;--ink:#0E1424;--muted:#3E4A63;--yellow:#F5CB47;--pyellow:#FFF1B8;--pink:#8EC5E8;--ppink:#DCEBF7;--night:#0B1B3F;--navy:#12306E;--blue:#2A5CB8;--sky:#8EC5E8;--pale:#DCEBF7;--line:#C4D5E8;
+--sy:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-30 -30 60 60' fill='%23FFDF5A'%3E%3Crect x='-6' y='-28' width='12' height='56'/%3E%3Crect x='-6' y='-28' width='12' height='56' transform='rotate(45)'/%3E%3Crect x='-6' y='-28' width='12' height='56' transform='rotate(90)'/%3E%3Crect x='-6' y='-28' width='12' height='56' transform='rotate(135)'/%3E%3C/svg%3E");--sp:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-30 -30 60 60' fill='%238EC5E8'%3E%3Crect x='-6' y='-28' width='12' height='56'/%3E%3Crect x='-6' y='-28' width='12' height='56' transform='rotate(45)'/%3E%3Crect x='-6' y='-28' width='12' height='56' transform='rotate(90)'/%3E%3Crect x='-6' y='-28' width='12' height='56' transform='rotate(135)'/%3E%3C/svg%3E");
+color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:64px;scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.65;font-size:1.05rem;position:relative;overflow-x:hidden}
+h1,h2,h3{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-height:1.05;margin:0 0 .5em;letter-spacing:-.01em}
+h1{font-size:clamp(3.4rem,17vw,8rem);margin:0}
+h2{font-size:clamp(2.4rem,8vw,4rem)}
+h3{font-size:1.5rem}
+p{margin:0 0 1em;max-width:65ch}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+.bgstar{position:absolute;width:440px;height:440px;z-index:0;pointer-events:none;color:var(--pyellow);right:-130px;top:170px}
+.bgstar.p{color:var(--ppink);left:-150px;right:auto;top:1700px}
+nav{display:flex;flex-wrap:wrap;gap:6px 20px;padding:18px 0;font-weight:700;border-bottom:1px solid var(--ink)}
+nav a{text-decoration:none;padding:4px 0;border-bottom:3px solid transparent}
+nav a:hover{border-color:var(--ink)}
+.hero{padding:70px 0 90px}
+.hero h1 .star{width:.62em;height:.62em;color:var(--yellow);margin:0 .05em;vertical-align:.04em}
+.lead{font-size:1.25rem;margin:28px 0;max-width:38ch}
+.btn{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:12px 26px;font-weight:700;text-decoration:none}
+.btn:hover{background:var(--yellow)}
+section{padding:64px 0;border-top:1px solid var(--ink)}
+.grid{display:grid;gap:38px 22px;margin-top:44px}
+@media(min-width:700px){.grid.three{grid-template-columns:repeat(3,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}}
+.card{position:relative;background:#fff;border:2px solid var(--ink);padding:34px 24px 24px 30px}
+.card::before{content:"";position:absolute;left:-14px;top:-22px;width:48px;height:48px;border:2px solid var(--ink);background:#fff var(--sy) center/28px no-repeat}
+.card:nth-child(even)::before{background-image:var(--sp)}
+.card p{margin:0;color:var(--muted)}
+ol.steps{padding-left:1.2em;max-width:65ch}
+ol.steps li{margin-bottom:.8em}
+.team{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.team span{background:#fff;border:2px solid var(--ink);border-radius:999px;padding:10px 24px;font-weight:700}
+footer{padding:36px 0 48px;border-top:1px solid var(--ink);color:var(--muted)}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 8px}
+.tab,.opt,button.btn{font:inherit;color:var(--ink);cursor:pointer}
+.tab{font-weight:700;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:8px 18px}
+.tab[aria-pressed="true"]{background:var(--yellow)}
+ul.list{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px;max-width:640px}
+ul.list li{background:#fff;border:2px solid var(--ink);padding:14px 18px}
+ul.list b,.big{font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:1.4rem;line-height:1.15;display:block}
+ul.list span{color:var(--muted)}
+.opts{display:grid;gap:10px;margin:16px 0;max-width:520px}
+.opt{font-weight:700;text-align:left;background:#fff;border:2px solid var(--ink);padding:14px 18px}
+.opt:hover{background:var(--pyellow)}
+button.btn{background:transparent}
+.pick{background:#fff;border:2px solid var(--ink);padding:26px;margin:20px 0;max-width:560px}
+.pick small{font-weight:700;color:var(--muted)}
+.pick .big{font-size:2.1rem;margin:6px 0 10px}
+.pick p{margin:0}
+.busca{font:inherit;padding:12px 16px;border:2px solid var(--ink);background:#fff;color:var(--ink);width:100%;max-width:420px;margin:12px 0 4px;border-radius:0}
+ul.list small{display:block;font-weight:700;color:var(--muted)}
+#sp .pick{margin-bottom:8px}
+.cv{display:flex;gap:14px;align-items:center}
+.capa{flex:none;width:58px;height:82px;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',Georgia,serif;font-size:1.6rem}
+.form{display:grid;gap:10px;max-width:520px;margin:16px 0}
+textarea.busca{display:block;resize:vertical;max-width:520px;margin:0}
+.form .busca{margin:0;max-width:none}
+.post{background:#fff;border:2px solid var(--ink);padding:16px 18px;margin-top:14px;max-width:520px}
+.post img{display:block;max-width:100%;margin:10px 0;border:2px solid var(--ink)}
+.post small{font-weight:700;color:var(--muted)}
+.post .tab{margin-top:6px}
+.pcard{border:2px solid var(--ink);padding:24px;max-width:640px;margin:20px 0;background:var(--tc,#FFDF5A)}
+.pcard h3{font-size:2.2rem;margin:0 0 4px}
+.pcard p{margin:0 0 6px}
+.stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.stats span{background:#fff;border:2px solid var(--ink);border-radius:999px;padding:4px 14px;font-weight:700;font-size:.9rem}
+.pcat{font-size:1.4rem;margin:22px 0 4px}
+.rowc{display:flex;gap:14px;overflow-x:auto;padding:8px 4px 12px;max-width:100%}
+.sh{flex:none;width:92px;font-size:.8rem;position:relative}
+.sh .capa{width:88px;height:124px;font-size:2rem}
+.sh b{display:block;margin-top:6px;line-height:1.2}
+.sh button{position:absolute;top:-8px;right:-4px;width:26px;height:26px;border-radius:50%;border:2px solid var(--ink);background:#fff;cursor:pointer;line-height:1;font:inherit;font-weight:700;color:var(--ink);padding:0}
+.temas{display:flex;gap:10px;margin:4px 0}
+.tema{width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);cursor:pointer;padding:0}
+.tema[aria-pressed="true"]{outline:3px solid var(--ink);outline-offset:2px}
+.linha{display:flex;flex-wrap:wrap;gap:10px}
+.linha .busca{max-width:none;flex:1 1 160px;margin:0}
+.linha .btn{flex:none}
+ul.list b a,.pick .big a,.sh b a{color:inherit;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+ul.list b a:hover,.pick .big a:hover,.sh b a:hover{background:var(--yellow)}
+.lk{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:.8rem;font-weight:700;text-decoration:none;border:2px solid var(--ink);border-radius:999px;padding:2px 12px;background:#fff;color:var(--ink)}
+.chip:hover{background:var(--yellow)}
+.cv>div{min-width:0}
+/* ===== tema Noite Estrelada ===== */
+.bgstar{color:#E2EDF8}.bgstar.p{color:#E6EEF8}
+nav{position:sticky;top:0;z-index:60;flex-wrap:nowrap;overflow-x:auto;gap:16px;padding:15px 0;border:0;background:var(--night);color:#EAF2FB;white-space:nowrap;scrollbar-width:none;box-shadow:0 0 0 100vmax var(--night);clip-path:inset(0 -100vmax)}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;font-size:.88rem}
+nav a:hover{border-color:var(--yellow)}
+:focus-visible{outline-color:var(--blue)}
+nav :focus-visible,.hero :focus-visible,.band-navy :focus-visible{outline-color:var(--yellow)}
+.hero{position:relative;overflow:hidden;width:100vw;margin-left:calc(50% - 50vw);min-height:580px;display:flex;align-items:flex-end;padding:0;background:var(--night);color:#fff}
+.hero .sky{position:absolute;inset:0;width:100%;height:100%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,15,40,0) 25%,rgba(6,15,40,.72))}
+.hero-in{position:relative;z-index:1;width:100%;max-width:1000px;margin:0 auto;padding:70px 20px 52px}
+.hero h1{color:#fff;text-shadow:0 6px 34px rgba(0,0,25,.55)}
+.hero .lead{color:#DCEBF7;text-shadow:0 2px 14px rgba(0,0,25,.6)}
+.btn{border-color:var(--night)}
+.btn:hover{background:var(--night);color:#fff}
+.hero .btn.cta{background:var(--yellow);border-color:var(--yellow);color:var(--night)}
+.hero .btn.cta:hover{background:#fff;border-color:#fff}
+.tw{animation:tw 4.5s ease-in-out infinite alternate}
+@keyframes tw{from{opacity:.55}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.tw{animation:none}html{scroll-behavior:auto}}
+section{border-top:0;padding:76px 0}
+section.band-sky{background:var(--pale);box-shadow:0 0 0 100vmax var(--pale);clip-path:inset(0 -100vmax)}
+section.band-navy{background:var(--night);color:#EAF2FB;box-shadow:0 0 0 100vmax var(--night);clip-path:inset(0 -100vmax)}
+h2::after{content:"";display:block;width:72px;height:12px;margin-top:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='12' viewBox='0 0 72 12'%3E%3Cpath d='M2 6 Q11 -2 20 6 T38 6 T56 6 T70 6' fill='none' stroke='%232A5CB8' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat}
+.band-navy h2{color:#fff}
+.band-navy h2::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='12' viewBox='0 0 72 12'%3E%3Cpath d='M2 6 Q11 -2 20 6 T38 6 T56 6 T70 6' fill='none' stroke='%23F5CB47' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E")}
+h2{margin-bottom:.7em}
+.card,.pick,.post,.pcard,ul.list li,.opt,.chip,.team span,.tab,.busca,.stats span,ol.steps li{color:var(--ink)}
+.card,.pick,.post,.pcard,ul.list li{border:1px solid var(--line);border-radius:14px}
+.card{padding:40px 22px 22px;box-shadow:0 1px 0 rgba(11,27,63,.06)}
+.card::before{left:20px;top:-22px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line)}
+.pcard{border-color:var(--night);background:var(--tc,#BFDDF2)}
+.capa{border:1px solid var(--night);border-radius:8px}
+.tab{border:1.5px solid var(--night)}
+.tab[aria-pressed="true"]{background:var(--night);color:#fff}
+.opt{border:1.5px solid var(--night);border-radius:12px}
+.opt:hover{background:var(--pale)}
+.busca{border:1.5px solid var(--night);border-radius:12px}
+.chip{border:1.5px solid var(--night)}
+.team span{border:1px solid var(--line)}
+.band-navy button.btn{color:#fff;border-color:#fff}
+.band-navy button.btn:hover{background:var(--yellow);color:var(--night);border-color:var(--yellow)}
+.band-navy .card{border-color:transparent}
+.two{display:grid;gap:34px;align-items:start}
+@media(min-width:820px){.two{grid-template-columns:1.4fr 1fr}}
+.quote{background:linear-gradient(160deg,var(--night),var(--blue));color:#fff;border-radius:18px;padding:32px;font-family:'DM Serif Display',Georgia,serif;font-size:1.8rem;line-height:1.2}
+.quote svg{display:block;width:34px;height:34px;color:var(--yellow);margin-bottom:14px}
+.quote small{display:block;margin-top:16px;font:600 .9rem 'Helvetica Neue',Arial,sans-serif;color:var(--pale)}
+ol.steps{counter-reset:s;list-style:none;padding:0;display:grid;gap:16px;max-width:none}
+@media(min-width:760px){ol.steps{grid-template-columns:repeat(3,1fr)}}
+ol.steps li{counter-increment:s;margin:0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+ol.steps li::before{content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--night);color:#fff;font-weight:700;margin-bottom:12px}
+footer{border:0;background:var(--night);color:#B7C8E0;box-shadow:0 0 0 100vmax var(--night);clip-path:inset(0 -100vmax);margin-top:0}
+.like{font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;border:1.5px solid var(--night);border-radius:999px;background:#fff;color:var(--ink);padding:2px 12px}
+.like[aria-pressed="true"]{background:var(--yellow)}
+.band-navy .tab[aria-pressed="true"]{background:var(--yellow);color:var(--night);border-color:var(--yellow)}
+.obra{background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:14px;max-width:560px}
+.obra b{font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:1.3rem;display:block}
+.obra img{display:block;max-width:100%;border-radius:8px;margin:10px 0}
+.obra small{font-weight:700;color:var(--muted)}
+.obra .busca{max-width:none}
+.cmt{border-top:1px solid var(--line);padding:6px 0;font-size:.95rem}
+.band-navy select.busca{width:auto;max-width:none}
+.hero::after{pointer-events:none}
+.hero-in{pointer-events:none}
+.hero-in>*{pointer-events:auto}
+.hero h1{width:fit-content}
+.dica{margin:16px 0 0;font-size:.9rem;color:#B7C8E0;text-shadow:0 2px 12px rgba(0,0,25,.7);max-width:44ch}
+.hs{cursor:pointer;outline:none}
+.hs .stg{transition:transform .2s;transform-box:fill-box;transform-origin:center}
+.hs:hover .stg,.hs:focus-visible .stg{transform:scale(1.28)}
+.hl{opacity:0;transition:opacity .15s;font:700 16px 'Helvetica Neue',Arial,sans-serif;fill:#fff;stroke:#0B1B3F;stroke-width:4px;paint-order:stroke;text-anchor:middle;pointer-events:none;letter-spacing:.2px}
+.hs:hover .hl,.hs:focus-visible .hl{opacity:1;fill:#F5CB47}
+.hs.sw{transition:filter .2s}
+.hs.sw:hover,.hs.sw:focus-visible{filter:brightness(1.5) drop-shadow(0 0 6px #BFDDF2)}
+@media(prefers-reduced-motion:reduce){.hs .stg,.hl{transition:none}}
+</style>
+
+
+<style>
+/* Navegação multipágina MovArt */
+body{min-height:100vh}
+body:not([data-page="inicio"]) .hero{display:none!important}
+body:not([data-page="inicio"]) .hero{display:none!important}
+body[data-page="inicio"] section{display:none!important}
+body[data-page="inicio"] section#sugestao{display:block!important}
+body[data-page="areas"] section,body[data-page="listas"] section,body[data-page="mural"] section,body[data-page="sobre"] section{display:none!important}
+body[data-page="areas"] section#hub-areas,body[data-page="listas"] section#hub-listas,body[data-page="mural"] section#hub-mural,body[data-page="sobre"] section#hub-sobre{display:block!important}
+body[data-page="danca"] section{display:none!important} body[data-page="danca"] section#danca{display:block!important}
+body[data-page="arte"] section{display:none!important} body[data-page="arte"] section#arte{display:block!important}
+body[data-page="musica"] section{display:none!important} body[data-page="musica"] section#musica{display:block!important}
+body[data-page="como"] section{display:none!important} body[data-page="como"] section#como{display:block!important}
+body[data-page="futuro"] section{display:none!important} body[data-page="futuro"] section#futuro{display:block!important}
+body[data-page="problema"] section{display:none!important} body[data-page="problema"] section#problema{display:block!important}
+body[data-page="conclusao"] section{display:none!important} body[data-page="conclusao"] section#conclusao{display:block!important}
+body[data-page="equipe"] section{display:none!important} body[data-page="equipe"] section#equipe{display:block!important}
+body[data-page="sugestao"] section{display:none!important} body[data-page="sugestao"] section#sugestao{display:block!important}
+body[data-page="prateleira"] section{display:none!important} body[data-page="prateleira"] section#prateleira{display:block!important}
+body[data-page="quiz"] section{display:none!important} body[data-page="quiz"] section#quiz{display:block!important}
+body[data-page="generos"] section{display:none!important} body[data-page="generos"] section#generos{display:block!important}
+nav{justify-content:center;gap:8px 18px;flex-wrap:wrap;padding:14px 8px}
+.hero{min-height:0;height:auto;aspect-ratio:1200/640;align-items:center;background:linear-gradient(135deg,#071331,#12306e 60%,#8ec5e8)}
+.hero .sky{inset:0;width:100%;height:100%;object-fit:contain}
+.hero::after{background:linear-gradient(90deg,rgba(6,15,40,.62),rgba(6,15,40,.08)),linear-gradient(0deg,rgba(6,15,40,.48),transparent 65%)}
+.hero-in{padding:clamp(24px,5vw,70px) 20px;}
+.hero h1{font-size:clamp(3rem,10vw,8rem)}
+.hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;margin-top:32px}
+.hub-card{display:block;min-height:190px;padding:28px 24px;border:2px solid rgba(255,255,255,.2);border-radius:18px;text-decoration:none;background:#142d5b;color:#eef4fa;transition:transform .2s,background .2s,border-color .2s,box-shadow .2s}
+.hub-card h3{font-size:1.8rem;margin-bottom:12px}.hub-card p{margin:0;color:inherit;opacity:.9}
+.hub-card:hover,.hub-card:focus-visible{background:#2a5cb8;border-color:#f5cb47;transform:translateY(-5px);box-shadow:0 12px 28px #0b1b3f33}
+@media(max-width:650px){.hero{aspect-ratio:auto;min-height:520px}.hero .sky{object-fit:cover}.hero-in{padding-top:60px}}
+</style>
+<style>
+/* Navegação multipágina MovArt */
+body{min-height:100vh}
+body[data-page="inicio"] section{display:none!important}
+body[data-page="inicio"] section#sugestao{display:block!important}
+body[data-page="areas"] section,body[data-page="listas"] section,body[data-page="mural"] section,body[data-page="sobre"] section{display:none!important}
+body[data-page="areas"] section#hub-areas,body[data-page="listas"] section#hub-listas,body[data-page="mural"] section#hub-mural,body[data-page="sobre"] section#hub-sobre{display:block!important}
+body[data-page="danca"] section{display:none!important} body[data-page="danca"] section#danca{display:block!important}
+body[data-page="arte"] section{display:none!important} body[data-page="arte"] section#arte{display:block!important}
+body[data-page="musica"] section{display:none!important} body[data-page="musica"] section#musica{display:block!important}
+body[data-page="como"] section{display:none!important} body[data-page="como"] section#como{display:block!important}
+body[data-page="futuro"] section{display:none!important} body[data-page="futuro"] section#futuro{display:block!important}
+body[data-page="problema"] section{display:none!important} body[data-page="problema"] section#problema{display:block!important}
+body[data-page="conclusao"] section{display:none!important} body[data-page="conclusao"] section#conclusao{display:block!important}
+body[data-page="equipe"] section{display:none!important} body[data-page="equipe"] section#equipe{display:block!important}
+body[data-page="sugestao"] section{display:none!important} body[data-page="sugestao"] section#sugestao{display:block!important}
+body[data-page="prateleira"] section{display:none!important} body[data-page="prateleira"] section#prateleira{display:block!important}
+body[data-page="quiz"] section{display:none!important} body[data-page="quiz"] section#quiz{display:block!important}
+body[data-page="generos"] section{display:none!important} body[data-page="generos"] section#generos{display:block!important}
+nav{justify-content:center;gap:8px 18px;flex-wrap:wrap;padding:14px 8px}
+.hero{min-height:0;height:auto;aspect-ratio:1200/640;align-items:center;background:linear-gradient(135deg,#071331,#12306e 60%,#8ec5e8)}
+.hero .sky{inset:0;width:100%;height:100%;object-fit:contain}
+.hero::after{background:linear-gradient(90deg,rgba(6,15,40,.62),rgba(6,15,40,.08)),linear-gradient(0deg,rgba(6,15,40,.48),transparent 65%)}
+.hero-in{padding:clamp(24px,5vw,70px) 20px;}
+.hero h1{font-size:clamp(3rem,10vw,8rem)}
+.hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;margin-top:32px}
+.hub-card{display:block;min-height:190px;padding:28px 24px;border:2px solid rgba(255,255,255,.2);border-radius:18px;text-decoration:none;background:#142d5b;color:#eef4fa;transition:transform .2s,background .2s,border-color .2s,box-shadow .2s}
+.hub-card h3{font-size:1.8rem;margin-bottom:12px}.hub-card p{margin:0;color:inherit;opacity:.9}
+.hub-card:hover,.hub-card:focus-visible{background:#2a5cb8;border-color:#f5cb47;transform:translateY(-5px);box-shadow:0 12px 28px #0b1b3f33}
+@media(max-width:650px){.hero{aspect-ratio:auto;min-height:520px}.hero .sky{object-fit:cover}.hero-in{padding-top:60px}}
+</style>
+</head>
+<body data-page="prateleira">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="st" viewBox="-30 -30 60 60"><g fill="currentColor"><rect x="-6" y="-28" width="12" height="56"/><rect x="-6" y="-28" width="12" height="56" transform="rotate(45)"/><rect x="-6" y="-28" width="12" height="56" transform="rotate(90)"/><rect x="-6" y="-28" width="12" height="56" transform="rotate(135)"/></g></symbol></svg><svg class="bgstar" aria-hidden="true"><use href="st.html"/></svg><svg class="bgstar p" aria-hidden="true"><use href="st.html"/></svg>
+<div class="wrap">
+  <nav aria-label="Menu principal"><a href="index.html">Início</a><a href="areas.html">Áreas</a><a href="listas.html">Listas</a><a href="mural.html">Meu mural</a><a href="como.html">Como funciona</a><a href="futuro.html">Em breve</a><a href="sobre.html">Sobre</a></nav>
+
+  <header class="hero">
+    <svg class="sky" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" role="group" aria-label="Céu estrelado com atalhos para as seções"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050F2E"/><stop offset=".55" stop-color="#0E2A66"/><stop offset="1" stop-color="#1D4C99"/></linearGradient><mask id="cres" maskUnits="userSpaceOnUse" x="-80" y="-80" width="160" height="160"><rect x="-80" y="-80" width="160" height="160" fill="#fff"/><circle cx="20" cy="-9" r="33" fill="#000"/></mask></defs><rect width="1200" height="640" fill="url(#sk)"/><path d="M-30.0 55.2 L-8.0 65.5 L14.0 77.7 L36.0 86.7 L58.0 89.1 L80.0 85.2 L102.0 78.5 L124.0 73.4 L146.0 72.2 L168.0 74.1 L190.0 75.8 L212.0 73.7 L234.0 66.6 L256.0 56.9 L278.0 49.2 L300.0 47.6 L322.0 53.5 L344.0 64.2 L366.0 75.0 L388.0 81.3 L410.0 81.8 L432.0 78.5 L454.0 75.4 L476.0 75.5 L498.0 79.1 L520.0 83.2 L542.0 83.8 L564.0 78.4 L586.0 67.9 L608.0 56.4 L630.0 48.9 L652.0 48.6 L674.0 54.9 L696.0 63.9 L718.0 71.0 L740.0 73.6 L762.0 72.3 L784.0 70.5 L806.0 71.7 L828.0 77.1 L850.0 84.6 L872.0 89.9 L894.0 89.1 L916.0 81.3 L938.0 69.4 L960.0 58.4 L982.0 52.7 L1004.0 53.6 L1026.0 58.9 L1048.0 64.3 L1070.0 66.5 L1092.0 65.0 L1114.0 62.4 L1136.0 62.7 L1158.0 68.1 L1180.0 77.7 L1202.0 87.6 L1224.0 92.8" fill="none" stroke="#1B3F8C" stroke-width="9" stroke-linecap="round" opacity="0.42" stroke-dasharray="46 8"/><path d="M-30.0 145.0 L-8.0 145.9 L14.0 141.8 L36.0 135.1 L58.0 128.9 L80.0 125.2 L102.0 124.0 L124.0 123.7 L146.0 122.0 L168.0 117.2 L190.0 109.2 L212.0 100.2 L234.0 93.1 L256.0 91.0 L278.0 95.2 L300.0 104.8 L322.0 117.0 L344.0 128.1 L366.0 135.3 L388.0 137.7 L410.0 136.3 L432.0 133.6 L454.0 132.0 L476.0 132.6 L498.0 134.7 L520.0 136.0 L542.0 134.0 L564.0 127.4 L586.0 116.9 L608.0 105.0 L630.0 95.2 L652.0 90.6 L674.0 92.4 L696.0 99.5 L718.0 109.1 L740.0 117.8 L762.0 123.5 L784.0 125.7 L806.0 125.9 L828.0 126.5 L850.0 129.3 L872.0 134.6 L894.0 140.6 L916.0 144.7 L938.0 144.1 L960.0 137.7 L982.0 126.6 L1004.0 113.7 L1026.0 102.7 L1048.0 96.4 L1070.0 95.9 L1092.0 99.9 L1114.0 105.6 L1136.0 110.4 L1158.0 112.7 L1180.0 113.0 L1202.0 113.2 L1224.0 115.6" fill="none" stroke="#2A5CB8" stroke-width="14" stroke-linecap="round" opacity="0.53"/><path d="M-30.0 184.0 L-8.0 178.1 L14.0 174.2 L36.0 171.7 L58.0 169.2 L80.0 165.3 L102.0 159.3 L124.0 151.5 L146.0 143.4 L168.0 137.2 L190.0 135.1 L212.0 138.2 L234.0 146.5 L256.0 158.4 L278.0 171.4 L300.0 182.9 L322.0 190.8 L344.0 194.5 L366.0 194.4 L388.0 192.2 L410.0 189.7 L432.0 188.1 L454.0 187.7 L476.0 187.7 L498.0 186.5 L520.0 182.7 L542.0 175.3 L564.0 164.9 L586.0 153.1 L608.0 142.3 L630.0 135.2 L652.0 133.2 L674.0 136.8 L696.0 144.9 L718.0 155.2 L740.0 165.3 L762.0 173.3 L784.0 178.4 L806.0 181.0 L828.0 182.5 L850.0 184.3 L872.0 187.4 L894.0 191.8 L916.0 196.3 L938.0 199.1 L960.0 198.2 L982.0 192.7 L1004.0 182.7 L1026.0 169.9 L1048.0 156.7 L1070.0 145.8 L1092.0 139.4 L1114.0 138.0 L1136.0 141.0 L1158.0 146.6 L1180.0 152.9 L1202.0 158.0 L1224.0 161.5" fill="none" stroke="#4A86D0" stroke-width="10" stroke-linecap="round" opacity="0.64"/><path d="M-30.0 212.1 L-8.0 207.1 L14.0 200.8 L36.0 193.6 L58.0 186.7 L80.0 181.5 L102.0 179.8 L124.0 182.4 L146.0 189.6 L168.0 200.6 L190.0 213.9 L212.0 227.3 L234.0 239.0 L256.0 247.4 L278.0 251.9 L300.0 252.8 L322.0 251.1 L344.0 248.1 L366.0 245.0 L388.0 242.4 L410.0 240.5 L432.0 238.4 L454.0 235.2 L476.0 229.9 L498.0 222.0 L520.0 211.8 L542.0 200.4 L564.0 189.4 L586.0 180.9 L608.0 176.4 L630.0 176.9 L652.0 182.1 L674.0 191.1 L696.0 202.2 L718.0 213.5 L740.0 223.4 L762.0 230.8 L784.0 235.7 L806.0 238.7 L828.0 240.7 L850.0 242.7 L872.0 245.4 L894.0 248.6 L916.0 251.6 L938.0 253.0 L960.0 251.5 L982.0 246.4 L1004.0 237.3 L1026.0 225.2 L1048.0 211.6 L1070.0 198.6 L1092.0 188.1 L1114.0 181.7 L1136.0 179.8 L1158.0 182.2 L1180.0 187.7 L1202.0 194.8 L1224.0 201.8" fill="none" stroke="#8EC5E8" stroke-width="15" stroke-linecap="round" opacity="0.75" stroke-dasharray="46 8"/><path d="M-30.0 247.8 L-8.0 245.2 L14.0 245.2 L36.0 248.2 L58.0 254.2 L80.0 262.3 L102.0 271.3 L124.0 280.0 L146.0 286.9 L168.0 291.3 L190.0 292.7 L212.0 291.6 L234.0 288.6 L256.0 284.8 L278.0 281.3 L300.0 278.8 L322.0 277.7 L344.0 277.8 L366.0 278.2 L388.0 278.2 L410.0 276.8 L432.0 273.6 L454.0 268.3 L476.0 261.5 L498.0 254.2 L520.0 247.5 L542.0 242.9 L564.0 241.1 L586.0 242.7 L608.0 247.3 L630.0 254.3 L652.0 262.3 L674.0 270.1 L696.0 276.5 L718.0 280.8 L740.0 282.8 L762.0 282.9 L784.0 281.9 L806.0 280.8 L828.0 280.4 L850.0 281.2 L872.0 283.1 L894.0 285.8 L916.0 288.1 L938.0 289.2 L960.0 288.1 L982.0 284.4 L1004.0 278.1 L1026.0 270.0 L1048.0 261.1 L1070.0 252.9 L1092.0 246.6 L1114.0 243.2 L1136.0 243.0 L1158.0 245.7 L1180.0 250.6 L1202.0 256.4 L1224.0 262.1" fill="none" stroke="#12306E" stroke-width="11" stroke-linecap="round" opacity="0.42"/><path d="M-30.0 316.3 L-8.0 326.1 L14.0 335.3 L36.0 342.7 L58.0 347.7 L80.0 350.0 L102.0 349.7 L124.0 347.3 L146.0 343.6 L168.0 339.4 L190.0 335.5 L212.0 332.4 L234.0 330.3 L256.0 328.9 L278.0 327.7 L300.0 326.1 L322.0 323.6 L344.0 319.6 L366.0 314.2 L388.0 307.5 L410.0 300.4 L432.0 293.6 L454.0 288.2 L476.0 285.1 L498.0 284.8 L520.0 287.6 L542.0 293.2 L564.0 301.0 L586.0 309.8 L608.0 318.7 L630.0 326.6 L652.0 332.8 L674.0 336.9 L696.0 339.1 L718.0 339.5 L740.0 339.0 L762.0 338.3 L784.0 337.9 L806.0 338.2 L828.0 339.2 L850.0 340.5 L872.0 341.6 L894.0 341.6 L916.0 340.0 L938.0 336.2 L960.0 330.3 L982.0 322.4 L1004.0 313.4 L1026.0 304.2 L1048.0 295.9 L1070.0 289.6 L1092.0 285.9 L1114.0 285.3 L1136.0 287.5 L1158.0 292.1 L1180.0 298.2 L1202.0 304.9 L1224.0 311.2" fill="none" stroke="#2A5CB8" stroke-width="16" stroke-linecap="round" opacity="0.53"/><path d="M-30.0 408.1 L-8.0 406.1 L14.0 402.4 L36.0 397.8 L58.0 392.9 L80.0 388.2 L102.0 384.1 L124.0 380.7 L146.0 377.9 L168.0 375.3 L190.0 372.5 L212.0 369.0 L234.0 364.6 L256.0 359.1 L278.0 352.7 L300.0 345.9 L322.0 339.3 L344.0 333.8 L366.0 329.9 L388.0 328.4 L410.0 329.7 L432.0 333.8 L454.0 340.3 L476.0 348.8 L498.0 358.4 L520.0 368.2 L542.0 377.3 L564.0 385.1 L586.0 391.0 L608.0 394.9 L630.0 396.9 L652.0 397.4 L674.0 396.9 L696.0 396.1 L718.0 395.3 L740.0 394.7 L762.0 394.6 L784.0 394.6 L806.0 394.3 L828.0 393.3 L850.0 391.0 L872.0 387.0 L894.0 381.2 L916.0 373.7 L938.0 364.9 L960.0 355.5 L982.0 346.3 L1004.0 338.2 L1026.0 332.0 L1048.0 328.4 L1070.0 327.6 L1092.0 329.6 L1114.0 334.1 L1136.0 340.3 L1158.0 347.7 L1180.0 355.2 L1202.0 362.3 L1224.0 368.4" fill="none" stroke="#6FA8DC" stroke-width="12" stroke-linecap="round" opacity="0.64" stroke-dasharray="46 8"/><path d="M-30.0 421.9 L-8.0 420.8 L14.0 420.5 L36.0 420.6 L58.0 420.7 L80.0 420.4 L102.0 419.2 L124.0 417.0 L146.0 413.8 L168.0 409.8 L190.0 405.3 L212.0 400.9 L234.0 397.2 L256.0 394.7 L278.0 393.8 L300.0 394.8 L322.0 397.7 L344.0 402.3 L366.0 408.2 L388.0 414.9 L410.0 421.6 L432.0 427.8 L454.0 432.8 L476.0 436.4 L498.0 438.4 L520.0 438.8 L542.0 437.9 L564.0 436.1 L586.0 433.9 L608.0 431.8 L630.0 430.2 L652.0 429.4 L674.0 429.4 L696.0 430.1 L718.0 431.1 L740.0 432.0 L762.0 432.3 L784.0 431.7 L806.0 429.8 L828.0 426.5 L850.0 421.9 L872.0 416.3 L894.0 410.2 L916.0 404.1 L938.0 398.8 L960.0 394.8 L982.0 392.5 L1004.0 392.2 L1026.0 393.9 L1048.0 397.3 L1070.0 402.0 L1092.0 407.5 L1114.0 413.2 L1136.0 418.4 L1158.0 422.7 L1180.0 425.8 L1202.0 427.6 L1224.0 428.3" fill="none" stroke="#1B3F8C" stroke-width="17" stroke-linecap="round" opacity="0.75"/><path d="M-30.0 461.2 L-8.0 458.1 L14.0 454.4 L36.0 450.3 L58.0 446.2 L80.0 442.6 L102.0 439.9 L124.0 438.5 L146.0 438.7 L168.0 440.8 L190.0 444.6 L212.0 450.0 L234.0 456.6 L256.0 463.9 L278.0 471.5 L300.0 478.7 L322.0 485.0 L344.0 490.0 L366.0 493.5 L388.0 495.4 L410.0 495.9 L432.0 495.0 L454.0 493.3 L476.0 491.2 L498.0 488.9 L520.0 486.8 L542.0 485.3 L564.0 484.3 L586.0 483.7 L608.0 483.4 L630.0 483.2 L652.0 482.5 L674.0 481.2 L696.0 478.9 L718.0 475.5 L740.0 471.0 L762.0 465.6 L784.0 459.4 L806.0 453.1 L828.0 447.0 L850.0 441.7 L872.0 437.8 L894.0 435.5 L916.0 435.1 L938.0 436.6 L960.0 439.9 L982.0 444.7 L1004.0 450.6 L1026.0 457.0 L1048.0 463.4 L1070.0 469.3 L1092.0 474.4 L1114.0 478.4 L1136.0 481.2 L1158.0 482.9 L1180.0 483.8 L1202.0 484.1 L1224.0 484.2" fill="none" stroke="#8EC5E8" stroke-width="13" stroke-linecap="round" opacity="0.42"/><path d="M-30.0 483.7 L-8.0 485.1 L14.0 488.1 L36.0 492.8 L58.0 498.9 L80.0 506.2 L102.0 514.2 L124.0 522.4 L146.0 530.4 L168.0 537.7 L190.0 543.8 L212.0 548.6 L234.0 551.9 L256.0 553.5 L278.0 553.7 L300.0 552.7 L322.0 550.8 L344.0 548.3 L366.0 545.6 L388.0 542.9 L410.0 540.4 L432.0 538.3 L454.0 536.6 L476.0 535.1 L498.0 533.6 L520.0 532.0 L542.0 529.9 L564.0 527.2 L586.0 523.6 L608.0 519.1 L630.0 513.8 L652.0 507.9 L674.0 501.6 L696.0 495.3 L718.0 489.4 L740.0 484.4 L762.0 480.7 L784.0 478.6 L806.0 478.3 L828.0 479.9 L850.0 483.2 L872.0 488.1 L894.0 494.2 L916.0 501.2 L938.0 508.5 L960.0 515.6 L982.0 522.2 L1004.0 528.0 L1026.0 532.8 L1048.0 536.4 L1070.0 538.9 L1092.0 540.6 L1114.0 541.5 L1136.0 542.0 L1158.0 542.3 L1180.0 542.7 L1202.0 543.4 L1224.0 544.3" fill="none" stroke="#12306E" stroke-width="9" stroke-linecap="round" opacity="0.53" stroke-dasharray="46 8"/><a class="hs sw" href="sobre.html" aria-label="Ir para Sobre o projeto"><title>Sobre o projeto</title><path d="M696.0 250.0 L696.8 250.5 L697.4 251.2 L698.0 252.0 L698.4 252.8 L698.6 253.8 L698.6 254.8 L698.4 255.9 L698.0 256.9 L697.3 258.0 L696.4 259.1 L695.3 260.1 L693.9 261.0 L692.3 261.8 L690.5 262.5 L688.6 263.1 L686.4 263.5 L684.2 263.6 L681.8 263.6 L679.3 263.4 L676.9 263.0 L674.4 262.3 L672.1 261.4 L669.8 260.2 L667.6 258.8 L665.6 257.2 L663.9 255.4 L662.4 253.4 L661.3 251.3 L660.4 249.0 L660.0 246.5 L659.9 244.0 L660.2 241.5 L661.0 238.9 L662.2 236.3 L663.8 233.8 L665.9 231.4 L668.4 229.2 L671.3 227.1 L674.5 225.2 L678.1 223.6 L682.1 222.2 L686.3 221.2 L690.7 220.5 L695.3 220.1 L700.0 220.2 L704.8 220.6 L709.6 221.4 L714.2 222.6 L718.8 224.3 L723.1 226.3 L727.1 228.7 L730.9 231.4 L734.2 234.5 L737.0 237.9 L739.4 241.6 L741.2 245.4 L742.4 249.5 L743.0 253.7 L742.9 258.0 L742.1 262.3 L740.7 266.6 L738.5 270.8 L735.7 274.9 L732.2 278.7 L728.1 282.3 L723.4 285.6 L718.2 288.6 L712.4 291.1 L706.2 293.2 L699.7 294.8 L692.8 295.9 L685.7 296.4 L678.5 296.4 L671.3 295.8 L664.1 294.5 L657.1 292.7 L650.3 290.4 L643.9 287.4 L637.8 283.9 L632.3 280.0 L627.4 275.5 L623.1 270.6 L619.6 265.4 L616.9 259.8 L615.0 254.0 L614.0 248.1 L614.0 242.0 L614.9 235.9 L616.7 229.8 L619.5 223.9 L623.3 218.2 L627.9 212.7 L633.4 207.6 L639.7 202.9 L646.8 198.7 L654.5 195.1 L662.8 192.0 L671.7 189.7 L680.9 188.0 L690.4 187.1 L700.1 186.9 L709.8 187.5 L719.5 188.9 L729.0 191.1 L738.2 194.0 L746.9 197.7 L755.1 202.1 L762.6 207.1 L769.4 212.8 L775.3 219.1 L780.3 225.8 L784.2 232.9 L787.1 240.4 L788.8 248.1 L789.3 256.0 L788.5 263.9 L786.6 271.8 L783.4 279.5 L779.1 287.0 L773.6 294.2 L766.9 300.9 L759.2 307.1 L750.5 312.8 L741.0 317.7 L730.7 321.8 L719.7 325.2 L708.2 327.7 L696.3 329.2 L684.1 329.8 L671.9 329.4 L659.6 328.1 L647.6 325.8 L635.9 322.5 L624.8 318.3 L614.2 313.1 L604.4 307.2 L595.6 300.4 L587.8 292.9 L581.1 284.8 L575.7 276.2 L571.6 267.1 L568.9 257.7 L567.6 248.1 L567.9 238.3 L569.6 228.6 L572.8 219.0 L577.5 209.7 L583.7 200.7 L591.2 192.2 L600.0 184.4 L610.1 177.2 L621.2 170.8 L633.4 165.3 L646.3 160.8 L660.0 157.3 L674.2 154.9 L688.8 153.7 L703.6 153.6 L718.4 154.7 L733.0 156.9 L747.3 160.4 L761.0 164.9 L774.1 170.6 L786.2 177.3 L797.4 185.0 L807.3 193.5 L815.9 202.8 L823.1 212.9 L828.8 223.5 L832.8 234.5 L835.1 245.9 L835.6 257.4 L834.4 269.0 L831.5 280.4 L826.7 291.7 L820.2 302.5 L812.1 312.8 L802.4 322.5 L791.2 331.4 L778.7 339.4 L764.9 346.3 L750.1 352.2 L734.4 356.9 L717.9 360.3 L701.0 362.5 L683.8 363.2 L666.4 362.6 L649.2 360.7 L632.2 357.3 L615.9 352.6 L600.2 346.6 L585.5 339.4 L571.9 331.0 L559.6 321.5 L548.8 311.1 L539.6 299.8 L532.1 287.8 L526.5 275.2 L522.9 262.2 L521.2 248.9 L521.6 235.5 L524.0 222.2 L528.5 209.0 L535.0 196.2 L543.4 184.0" fill="none" stroke="#12306E" stroke-width="18" stroke-linecap="round" opacity=".85"/><path d="M700.0 250.0 L700.7 250.9 L701.3 251.8 L701.8 252.9 L702.0 254.1 L702.0 255.3 L701.8 256.6 L701.3 257.9 L700.5 259.2 L699.5 260.4 L698.2 261.6 L696.7 262.8 L694.9 263.8 L692.9 264.7 L690.7 265.4 L688.2 265.9 L685.7 266.3 L683.0 266.4 L680.2 266.3 L677.4 265.9 L674.5 265.3 L671.7 264.4 L669.0 263.3 L666.5 261.9 L664.1 260.2 L661.9 258.3 L660.1 256.2 L658.5 253.9 L657.3 251.5 L656.4 248.8 L656.0 246.1 L656.0 243.3 L656.5 240.4 L657.4 237.5 L658.9 234.7 L660.8 232.0 L663.1 229.3 L666.0 226.9 L669.2 224.6 L672.9 222.6 L676.9 220.8 L681.3 219.4 L685.9 218.3 L690.8 217.6 L695.8 217.3 L701.0 217.4 L706.2 217.9 L711.3 218.8 L716.4 220.2 L721.3 222.0 L725.9 224.2 L730.3 226.9 L734.2 229.9 L737.8 233.2 L740.8 236.9 L743.3 240.9 L745.2 245.1 L746.4 249.5 L746.9 254.0 L746.8 258.6 L745.9 263.2 L744.3 267.8 L742.0 272.3 L738.9 276.6 L735.1 280.7 L730.7 284.5 L725.7 288.0 L720.0 291.1 L713.9 293.8 L707.3 296.0 L700.3 297.7 L693.0 298.8 L685.5 299.3 L677.8 299.2 L670.2 298.5 L662.6 297.2 L655.2 295.3 L648.0 292.7 L641.2 289.6 L634.9 285.9 L629.1 281.6 L623.9 276.9 L619.5 271.8 L615.8 266.2 L613.0 260.4 L611.0 254.3 L610.0 248.0 L610.0 241.6 L611.0 235.2 L613.0 228.8 L616.0 222.6 L619.9 216.6 L624.8 210.8 L630.6 205.5 L637.3 200.6 L644.7 196.3 L652.8 192.5 L661.5 189.3 L670.8 186.9 L680.5 185.1 L690.4 184.2 L700.5 184.0 L710.7 184.7 L720.8 186.2 L730.7 188.5 L740.3 191.6 L749.4 195.4 L757.9 200.0 L765.7 205.3 L772.8 211.3 L778.9 217.8 L784.0 224.8 L788.1 232.2 L791.0 240.0 L792.8 248.0 L793.2 256.2 L792.5 264.5 L790.4 272.7 L787.1 280.7 L782.5 288.5 L776.8 295.9 L769.9 302.9 L761.8 309.3 L752.8 315.1 L742.9 320.2 L732.2 324.5 L720.8 328.0 L708.9 330.5 L696.5 332.1 L683.9 332.7 L671.2 332.3 L658.6 330.9 L646.1 328.4 L634.0 325.0 L622.5 320.6 L611.6 315.3 L601.5 309.1 L592.4 302.1 L584.3 294.4 L577.5 286.0 L571.9 277.1 L567.7 267.7 L564.9 257.9 L563.6 248.0 L563.9 237.9 L565.7 227.9 L569.1 218.0 L573.9 208.4 L580.3 199.1 L588.1 190.4 L597.2 182.3 L607.6 174.9 L619.1 168.4 L631.6 162.7 L645.0 158.1 L659.1 154.5 L673.8 152.1 L688.8 150.8 L704.0 150.7 L719.2 151.8 L734.3 154.2 L749.0 157.7 L763.1 162.5 L776.5 168.3 L789.0 175.2 L800.4 183.1 L810.6 191.9 L819.5 201.5 L826.8 211.8 L832.6 222.7 L836.7 234.1 L839.1 245.8 L839.6 257.6 L838.4 269.5 L835.3 281.3 L830.4 292.8 L823.7 303.9 L815.4 314.5 L805.4 324.4 L793.9 333.5 L781.0 341.7 L766.9 348.8 L751.6 354.9 L735.5 359.7 L718.7 363.2 L701.3 365.3 L683.6 366.1 L665.8 365.5 L648.1 363.4 L630.8 360.0 L614.0 355.2 L598.0 349.0 L582.9 341.6 L569.0 333.0 L556.4 323.3 L545.4 312.6 L536.0 301.0 L528.4 288.7 L522.6 275.8 L518.9 262.5 L517.2 248.9 L517.6 235.2 L520.1 221.5 L524.7 208.1 L531.4 195.0 L540.0 182.5" fill="none" stroke="#4A86D0" stroke-width="10" stroke-linecap="round" opacity=".9"/><path d="M704.0 250.0 L704.7 251.2 L705.3 252.5 L705.6 253.8 L705.6 255.3 L705.4 256.8 L704.9 258.3 L704.1 259.9 L703.1 261.4 L701.7 262.8 L700.0 264.2 L698.1 265.5 L695.9 266.6 L693.4 267.5 L690.8 268.3 L687.9 268.8 L684.9 269.1 L681.8 269.2 L678.6 268.9 L675.4 268.4 L672.2 267.6 L669.1 266.5 L666.0 265.2 L663.2 263.5 L660.6 261.6 L658.3 259.4 L656.2 257.0 L654.6 254.4 L653.3 251.6 L652.4 248.7 L652.1 245.6 L652.2 242.5 L652.8 239.3 L653.9 236.2 L655.6 233.1 L657.7 230.1 L660.4 227.2 L663.6 224.6 L667.2 222.1 L671.2 220.0 L675.7 218.1 L680.5 216.6 L685.6 215.5 L690.9 214.7 L696.3 214.4 L701.9 214.6 L707.5 215.2 L713.1 216.2 L718.5 217.8 L723.8 219.8 L728.8 222.2 L733.4 225.1 L737.6 228.3 L741.4 232.0 L744.6 236.0 L747.2 240.2 L749.1 244.7 L750.4 249.4 L750.9 254.3 L750.7 259.2 L749.7 264.1 L747.9 269.0 L745.4 273.7 L742.1 278.3 L738.1 282.7 L733.3 286.7 L727.9 290.4 L721.9 293.7 L715.3 296.5 L708.3 298.8 L700.9 300.5 L693.2 301.6 L685.2 302.2 L677.1 302.0 L669.1 301.3 L661.0 299.9 L653.2 297.8 L645.7 295.1 L638.6 291.7 L631.9 287.8 L625.8 283.3 L620.4 278.3 L615.8 272.9 L612.0 267.1 L609.0 260.9 L607.0 254.5 L606.0 247.9 L606.1 241.2 L607.1 234.4 L609.3 227.8 L612.4 221.3 L616.6 215.0 L621.7 209.0 L627.8 203.4 L634.8 198.3 L642.6 193.8 L651.1 189.9 L660.3 186.6 L669.9 184.0 L680.0 182.3 L690.4 181.3 L701.0 181.2 L711.6 181.9 L722.1 183.5 L732.4 185.9 L742.4 189.1 L751.8 193.2 L760.7 198.0 L768.8 203.5 L776.1 209.7 L782.5 216.5 L787.8 223.8 L792.0 231.5 L795.0 239.6 L796.8 248.0 L797.2 256.5 L796.4 265.0 L794.2 273.5 L790.8 281.8 L786.0 289.9 L780.0 297.6 L772.8 304.8 L764.5 311.5 L755.1 317.5 L744.8 322.7 L733.7 327.2 L721.9 330.7 L709.5 333.3 L696.8 335.0 L683.7 335.6 L670.6 335.1 L657.5 333.6 L644.6 331.1 L632.2 327.6 L620.2 323.0 L609.0 317.5 L598.6 311.1 L589.2 303.8 L580.9 295.8 L573.8 287.2 L568.1 277.9 L563.7 268.2 L560.9 258.2 L559.6 247.9 L559.9 237.6 L561.8 227.2 L565.3 217.0 L570.4 207.1 L576.9 197.6 L585.0 188.6 L594.4 180.3 L605.1 172.7 L617.0 165.9 L629.9 160.1 L643.7 155.4 L658.2 151.7 L673.3 149.2 L688.8 147.9 L704.4 147.8 L720.1 149.0 L735.5 151.5 L750.6 155.1 L765.2 160.0 L778.9 166.0 L791.7 173.1 L803.5 181.2 L814.0 190.3 L823.0 200.2 L830.6 210.8 L836.5 222.0 L840.7 233.7 L843.1 245.6 L843.6 257.8 L842.3 270.0 L839.1 282.1 L834.1 293.9 L827.2 305.3 L818.6 316.2 L808.4 326.3 L796.5 335.7 L783.3 344.0 L768.8 351.4 L753.2 357.5 L736.7 362.4 L719.4 366.0 L701.6 368.2 L683.4 369.0 L665.2 368.3 L647.1 366.2 L629.4 362.7 L612.2 357.7 L595.8 351.4 L580.3 343.8 L566.1 335.0 L553.3 325.0 L542.0 314.1 L532.3 302.2 L524.6 289.6 L518.7 276.4 L514.9 262.8 L513.2 248.9 L513.6 234.8 L516.2 220.9 L521.0 207.1 L527.8 193.7 L536.6 181.0" fill="none" stroke="#BFDDF2" stroke-width="4" stroke-linecap="round" opacity=".85" stroke-dasharray="30 10"/></a><a class="hs sw" href="generos.html" aria-label="Ir para Catálogo por gênero"><title>Catálogo por gênero</title><path d="M399.9 303.6 L399.2 304.0 L398.4 304.4 L397.5 304.7 L396.5 304.9 L395.5 305.0 L394.3 305.0 L393.1 304.8 L391.9 304.5 L390.7 304.1 L389.5 303.6 L388.4 302.9 L387.4 302.0 L386.5 301.1 L385.8 300.0 L385.2 298.8 L384.8 297.6 L384.6 296.2 L384.7 294.8 L385.0 293.4 L385.6 292.0 L386.4 290.6 L387.5 289.2 L388.9 287.9 L390.5 286.6 L392.4 285.5 L394.5 284.6 L396.8 283.7 L399.2 283.1 L401.9 282.7 L404.6 282.5 L407.5 282.5 L410.4 282.7 L413.3 283.2 L416.1 284.0 L418.9 285.0 L421.6 286.3 L424.1 287.8 L426.4 289.6 L428.4 291.5 L430.1 293.7 L431.6 296.0 L432.7 298.5 L433.3 301.1 L433.6 303.8 L433.5 306.6 L432.9 309.4 L431.8 312.1 L430.3 314.8 L428.4 317.5 L426.0 319.9 L423.2 322.3 L420.0 324.4 L416.4 326.2 L412.6 327.8 L408.4 329.1 L403.9 330.1 L399.3 330.7 L394.6 330.9 L389.7 330.8 L384.9 330.2 L380.1 329.3 L375.4 327.9 L370.9 326.2 L366.6 324.0 L362.6 321.5 L359.0 318.7 L355.8 315.6 L353.1 312.1 L350.8 308.5 L349.2 304.6 L348.1 300.6 L347.7 296.4 L347.9 292.2 L348.8 288.0 L350.4 283.8 L352.6 279.7 L355.4 275.8 L358.9 272.1 L362.9 268.7 L367.6 265.5 L372.7 262.8 L378.3 260.4 L384.3 258.5 L390.6 257.0 L397.2 256.1 L404.0 255.6 L410.8 255.7 L417.7 256.4 L424.5 257.6 L431.1 259.4 L437.5 261.7 L443.6 264.6 L449.2 267.9 L454.3 271.7 L458.9 275.9 L462.8 280.5 L466.0 285.5 L468.5 290.7 L470.1 296.1 L471.0 301.7 L470.9 307.4 L470.0 313.1 L468.2 318.7 L465.5 324.2 L462.0 329.5 L457.6 334.5 L452.5 339.2 L446.6 343.5 L440.0 347.3 L432.9 350.6 L425.1 353.4 L417.0 355.5 L408.5 357.0 L399.8 357.8 L390.9 357.9 L382.0 357.3 L373.1 355.9 L364.5 353.9 L356.1 351.2 L348.2 347.8 L340.8 343.7 L333.9 339.1 L327.8 333.9 L322.5 328.2 L318.0 322.1 L314.5 315.6 L312.0 308.8 L310.6 301.8 L310.2 294.7 L310.9 287.5 L312.7 280.4 L315.6 273.4 L319.6 266.7 L324.6 260.3 L330.6 254.2 L337.6 248.7 L345.4 243.6 L354.0 239.2 L363.3 235.5 L373.2 232.6 L383.5 230.4 L394.2 229.0 L405.1 228.5 L416.1 228.9 L427.0 230.1 L437.7 232.3 L448.1 235.2 L458.1 239.0 L467.5 243.6 L476.1 249.0 L484.0 255.0 L490.9 261.7 L496.8 268.9 L501.6 276.6 L505.2 284.7 L507.5 293.0 L508.6 301.6 L508.4 310.2 L506.8 318.8 L503.9 327.3 L499.7 335.6 L494.2 343.5 L487.5 351.0 L479.7 357.9 L470.8 364.3 L460.9 369.9 L450.2 374.7 L438.7 378.6 L426.6 381.7 L414.1 383.8 L401.2 384.9 L388.2 384.9 L375.2 383.9 L362.3 381.9 L349.8 378.9 L337.7 374.8 L326.3 369.8 L315.7 363.9 L305.9 357.2 L297.2 349.7 L289.7 341.5 L283.4 332.7" fill="none" stroke="#12306E" stroke-width="18" stroke-linecap="round" opacity=".85"/><path d="M399.7 306.5 L398.7 306.9 L397.5 307.2 L396.1 307.4 L394.7 307.5 L393.3 307.4 L391.8 307.2 L390.2 306.8 L388.7 306.3 L387.3 305.6 L385.9 304.8 L384.6 303.8 L383.5 302.7 L382.5 301.4 L381.8 300.0 L381.2 298.5 L380.9 296.9 L380.9 295.3 L381.1 293.6 L381.6 291.9 L382.4 290.2 L383.6 288.6 L385.0 287.0 L386.7 285.5 L388.7 284.1 L391.0 282.8 L393.5 281.8 L396.2 280.9 L399.1 280.2 L402.2 279.8 L405.4 279.6 L408.6 279.7 L411.9 280.1 L415.2 280.7 L418.5 281.7 L421.6 282.9 L424.6 284.4 L427.3 286.2 L429.9 288.2 L432.1 290.4 L434.0 292.9 L435.5 295.5 L436.6 298.3 L437.3 301.3 L437.6 304.3 L437.3 307.3 L436.6 310.4 L435.4 313.5 L433.6 316.5 L431.4 319.3 L428.8 322.0 L425.6 324.6 L422.0 326.8 L418.1 328.9 L413.8 330.6 L409.2 331.9 L404.3 332.9 L399.3 333.6 L394.1 333.8 L388.8 333.6 L383.5 332.9 L378.3 331.8 L373.2 330.3 L368.4 328.4 L363.7 326.1 L359.5 323.3 L355.6 320.3 L352.2 316.8 L349.3 313.1 L347.0 309.1 L345.2 304.9 L344.1 300.6 L343.7 296.1 L344.0 291.6 L345.0 287.1 L346.7 282.6 L349.1 278.3 L352.2 274.1 L356.0 270.2 L360.4 266.5 L365.3 263.2 L370.8 260.2 L376.8 257.7 L383.3 255.7 L390.0 254.2 L397.0 253.2 L404.2 252.8 L411.5 252.9 L418.8 253.6 L426.0 255.0 L433.1 256.9 L439.8 259.4 L446.2 262.4 L452.1 266.0 L457.6 270.0 L462.4 274.5 L466.5 279.4 L469.8 284.6 L472.4 290.2 L474.1 295.9 L475.0 301.8 L474.9 307.8 L473.9 313.8 L471.9 319.7 L469.1 325.5 L465.3 331.1 L460.7 336.3 L455.3 341.3 L449.0 345.8 L442.1 349.8 L434.5 353.2 L426.4 356.1 L417.9 358.3 L408.9 359.8 L399.8 360.7 L390.4 360.7 L381.1 360.1 L371.8 358.7 L362.8 356.5 L354.0 353.6 L345.7 350.1 L338.0 345.8 L330.8 340.9 L324.5 335.5 L318.9 329.5 L314.3 323.1 L310.7 316.3 L308.1 309.2 L306.6 301.9 L306.2 294.4 L306.9 287.0 L308.9 279.6 L311.9 272.3 L316.1 265.3 L321.4 258.6 L327.7 252.3 L335.0 246.5 L343.1 241.3 L352.1 236.7 L361.8 232.9 L372.1 229.8 L382.9 227.6 L394.0 226.2 L405.3 225.7 L416.7 226.1 L428.1 227.4 L439.2 229.6 L450.0 232.7 L460.3 236.7 L470.1 241.5 L479.1 247.0 L487.2 253.3 L494.3 260.2 L500.4 267.7 L505.4 275.7 L509.1 284.1 L511.5 292.8 L512.6 301.7 L512.3 310.6 L510.7 319.5 L507.6 328.3 L503.3 336.9 L497.6 345.1 L490.6 352.8 L482.5 360.0 L473.2 366.5 L463.0 372.3 L451.9 377.3 L440.0 381.4 L427.5 384.5 L414.6 386.6 L401.3 387.7 L387.8 387.8 L374.4 386.7 L361.1 384.6 L348.1 381.5 L335.7 377.3 L323.9 372.1 L312.9 366.0 L302.9 359.1 L293.9 351.3 L286.1 342.8 L279.7 333.7" fill="none" stroke="#4A86D0" stroke-width="10" stroke-linecap="round" opacity=".9"/><path d="M399.6 309.4 L398.1 309.7 L396.5 310.0 L394.7 310.1 L392.9 310.0 L391.1 309.8 L389.2 309.4 L387.4 308.8 L385.6 308.1 L383.9 307.1 L382.3 306.0 L380.8 304.7 L379.6 303.3 L378.6 301.7 L377.8 300.0 L377.2 298.2 L377.0 296.3 L377.1 294.4 L377.5 292.4 L378.2 290.4 L379.3 288.5 L380.7 286.6 L382.4 284.7 L384.5 283.1 L386.9 281.5 L389.5 280.1 L392.5 279.0 L395.6 278.0 L399.0 277.3 L402.5 276.9 L406.1 276.8 L409.8 277.0 L413.5 277.4 L417.2 278.2 L420.8 279.3 L424.3 280.8 L427.6 282.5 L430.6 284.5 L433.4 286.8 L435.8 289.3 L437.8 292.1 L439.5 295.0 L440.6 298.1 L441.3 301.4 L441.5 304.7 L441.2 308.1 L440.3 311.5 L438.9 314.8 L437.0 318.1 L434.5 321.2 L431.5 324.1 L428.0 326.9 L424.1 329.3 L419.7 331.5 L415.0 333.3 L410.0 334.8 L404.7 335.8 L399.2 336.4 L393.6 336.6 L387.9 336.4 L382.2 335.6 L376.5 334.4 L371.1 332.8 L365.8 330.7 L360.9 328.1 L356.4 325.1 L352.2 321.8 L348.6 318.1 L345.5 314.1 L343.1 309.8 L341.3 305.3 L340.1 300.6 L339.8 295.9 L340.1 291.0 L341.2 286.2 L343.1 281.4 L345.7 276.8 L349.0 272.4 L353.1 268.2 L357.8 264.3 L363.1 260.8 L369.0 257.7 L375.4 255.0 L382.2 252.9 L389.4 251.3 L396.9 250.3 L404.5 249.9 L412.2 250.1 L419.9 250.9 L427.6 252.3 L435.0 254.4 L442.1 257.0 L448.9 260.3 L455.1 264.0 L460.8 268.3 L465.8 273.1 L470.1 278.3 L473.7 283.8 L476.3 289.6 L478.1 295.7 L479.0 301.9 L478.8 308.2 L477.8 314.5 L475.7 320.7 L472.7 326.8 L468.7 332.7 L463.8 338.2 L458.0 343.3 L451.5 348.0 L444.2 352.2 L436.2 355.8 L427.7 358.8 L418.7 361.1 L409.4 362.7 L399.8 363.5 L390.0 363.6 L380.2 362.9 L370.5 361.4 L361.1 359.1 L351.9 356.1 L343.3 352.3 L335.2 347.9 L327.8 342.8 L321.1 337.0 L315.4 330.8 L310.6 324.1 L306.8 317.0 L304.1 309.6 L302.6 302.0 L302.2 294.2 L303.0 286.4 L305.0 278.7 L308.3 271.1 L312.6 263.8 L318.2 256.9 L324.7 250.3 L332.3 244.3 L340.9 238.9 L350.2 234.2 L360.3 230.2 L371.0 227.0 L382.2 224.7 L393.7 223.3 L405.5 222.8 L417.3 223.2 L429.1 224.6 L440.7 226.9 L451.9 230.2 L462.6 234.3 L472.7 239.3 L482.0 245.1 L490.4 251.6 L497.8 258.8 L504.1 266.6 L509.2 274.9 L513.0 283.5 L515.5 292.5 L516.6 301.7 L516.3 311.0 L514.5 320.2 L511.4 329.3 L506.8 338.2 L500.9 346.6 L493.7 354.6 L485.3 362.0 L475.7 368.8 L465.1 374.7 L453.6 379.9 L441.4 384.1 L428.4 387.3 L415.0 389.5 L401.3 390.6 L387.4 390.6 L373.5 389.6 L359.8 387.4 L346.5 384.1 L333.6 379.8 L321.5 374.4 L310.1 368.1 L299.8 360.9 L290.6 352.9 L282.6 344.1 L275.9 334.8" fill="none" stroke="#BFDDF2" stroke-width="4" stroke-linecap="round" opacity=".85" stroke-dasharray="30 10"/></a><g transform="translate(170 120)"><a class="hs" href="quiz.html" aria-label="Ir para Quiz"><title>Quiz</title><circle r="46" fill="transparent"/><g class="stg tw" style="animation-delay:0.0s"><g transform="scale(1.00)"><circle r="40" fill="#F5CB47" opacity=".12"/><circle r="28" fill="#F5CB47" opacity=".2"/><circle r="20" fill="none" stroke="#FFE27A" stroke-width="3" opacity=".55"/><circle r="30" fill="none" stroke="#BFDDF2" stroke-width="2.5" opacity=".4"/><circle r="40" fill="none" stroke="#8EC5E8" stroke-width="2" opacity=".28"/><circle r="11" fill="#FFF1B8"/><circle r="7" fill="#F5CB47"/></g></g><text class="hl" y="-56">Quiz</text></a></g><g transform="translate(330 64)"><a class="hs" href="mural.html" aria-label="Ir para Meu mural"><title>Meu mural</title><circle r="46" fill="transparent"/><g class="stg tw" style="animation-delay:0.7s"><g transform="scale(0.80)"><circle r="40" fill="#F5CB47" opacity=".12"/><circle r="28" fill="#F5CB47" opacity=".2"/><circle r="20" fill="none" stroke="#FFE27A" stroke-width="3" opacity=".55"/><circle r="30" fill="none" stroke="#BFDDF2" stroke-width="2.5" opacity=".4"/><circle r="40" fill="none" stroke="#8EC5E8" stroke-width="2" opacity=".28"/><circle r="11" fill="#FFF1B8"/><circle r="7" fill="#F5CB47"/></g></g><text class="hl" y="55">Meu mural</text></a></g><g transform="translate(560 140)"><a class="hs" href="prateleira.html" aria-label="Ir para Prateleira"><title>Prateleira</title><circle r="46" fill="transparent"/><g class="stg tw" style="animation-delay:1.4s"><g transform="scale(1.15)"><circle r="40" fill="#F5CB47" opacity=".12"/><circle r="28" fill="#F5CB47" opacity=".2"/><circle r="20" fill="none" stroke="#FFE27A" stroke-width="3" opacity=".55"/><circle r="30" fill="none" stroke="#BFDDF2" stroke-width="2.5" opacity=".4"/><circle r="40" fill="none" stroke="#8EC5E8" stroke-width="2" opacity=".28"/><circle r="11" fill="#FFF1B8"/><circle r="7" fill="#F5CB47"/></g></g><text class="hl" y="-62">Prateleira</text></a></g><g transform="translate(900 80)"><a class="hs" href="musica.html" aria-label="Ir para Música"><title>Música</title><circle r="46" fill="transparent"/><g class="stg tw" style="animation-delay:2.1s"><g transform="scale(1.00)"><circle r="40" fill="#F5CB47" opacity=".12"/><circle r="28" fill="#F5CB47" opacity=".2"/><circle r="20" fill="none" stroke="#FFE27A" stroke-width="3" opacity=".55"/><circle r="30" fill="none" stroke="#BFDDF2" stroke-width="2.5" opacity=".4"/><circle r="40" fill="none" stroke="#8EC5E8" stroke-width="2" opacity=".28"/><circle r="11" fill="#FFF1B8"/><circle r="7" fill="#F5CB47"/></g></g><text class="hl" y="64">Música</text></a></g><g transform="translate(1000 230)"><a class="hs" href="listas.html" aria-label="Ir para Listas"><title>Listas</title><circle r="46" fill="transparent"/><g class="stg tw" style="animation-delay:2.8s"><g transform="scale(0.85)"><circle r="40" fill="#F5CB47" opacity=".12"/><circle r="28" fill="#F5CB47" opacity=".2"/><circle r="20" fill="none" stroke="#FFE27A" stroke-width="3" opacity=".55"/><circle r="30" fill="none" stroke="#BFDDF2" stroke-width="2.5" opacity=".4"/><circle r="40" fill="none" stroke="#8EC5E8" stroke-width="2" opacity=".28"/><circle r="11" fill="#FFF1B8"/><circle r="7" fill="#F5CB47"/></g></g><text class="hl" y="57">Listas</text></a></g><g transform="translate(800 330)"><a class="hs" href="danca.html" aria-label="Ir para Dança"><title>Dança</title><circle r="46" fill="transparent"/><g class="stg tw" style="animation-delay:3.5s"><g transform="scale(0.90)"><circle r="40" fill="#F5CB47" opacity=".12"/><circle r="28" fill="#F5CB47" opacity=".2"/><circle r="20" fill="none" stroke="#FFE27A" stroke-width="3" opacity=".55"/><circle r="30" fill="none" stroke="#BFDDF2" stroke-width="2.5" opacity=".4"/><circle r="40" fill="none" stroke="#8EC5E8" stroke-width="2" opacity=".28"/><circle r="11" fill="#FFF1B8"/><circle r="7" fill="#F5CB47"/></g></g><text class="hl" y="59">Dança</text></a></g><g transform="translate(70 300)"><a class="hs" href="arte.html" aria-label="Ir para Arte e fotografia"><title>Arte e fotografia</title><circle r="46" fill="transparent"/><g class="stg tw" style="animation-delay:4.2s"><g transform="scale(0.70)"><circle r="40" fill="#F5CB47" opacity=".12"/><circle r="28" fill="#F5CB47" opacity=".2"/><circle r="20" fill="none" stroke="#FFE27A" stroke-width="3" opacity=".55"/><circle r="30" fill="none" stroke="#BFDDF2" stroke-width="2.5" opacity=".4"/><circle r="40" fill="none" stroke="#8EC5E8" stroke-width="2" opacity=".28"/><circle r="11" fill="#FFF1B8"/><circle r="7" fill="#F5CB47"/></g></g><text class="hl" x="37" y="6" style="text-anchor:start">Arte e fotografia</text></a></g><g transform="translate(1070 105)"><a class="hs" href="sugestao.html" aria-label="Ir para Sugestão de hoje"><title>Sugestão de hoje</title><circle r="66" fill="transparent"/><g class="stg tw" style="animation-delay:.4s"><circle r="62" fill="none" stroke="#FFE27A" stroke-width="3" opacity=".3"/><circle r="50" fill="none" stroke="#BFDDF2" stroke-width="2.5" opacity=".3"/><circle r="38" fill="#FFD95A" mask="url(#cres)"/></g><text class="hl" y="90">Sugestão de hoje</text></a></g><path d="M0 590 C160 545 330 600 560 565 S 980 540 1200 585 L1200 640 L0 640Z" fill="#050B1E" pointer-events="none"/><path d="M118 640 C88 560 82 430 118 250 C134 330 168 350 158 470 C152 540 160 600 150 640Z" fill="#03081A" pointer-events="none"/><circle cx="420" cy="585" r="2.6" fill="#F5CB47" opacity=".85" pointer-events="none"/><circle cx="452" cy="590" r="2.6" fill="#F5CB47" opacity=".85" pointer-events="none"/><circle cx="490" cy="583" r="2.6" fill="#F5CB47" opacity=".85" pointer-events="none"/><circle cx="640" cy="572" r="2.6" fill="#F5CB47" opacity=".85" pointer-events="none"/><circle cx="668" cy="575" r="2.6" fill="#F5CB47" opacity=".85" pointer-events="none"/><circle cx="760" cy="566" r="2.6" fill="#F5CB47" opacity=".85" pointer-events="none"/></svg>
+    <div class="hero-in">
+      <h1>MOV<svg class="star" aria-hidden="true"><use href="st.html"/></svg>ART</h1>
+      <p class="lead">Arte, música, dança, filmes e livros em um só espaço. Descubra novos estilos, monte a sua prateleira e compartilhe seu gosto com os amigos.</p>
+      <a class="btn cta" href="sobre.html">Conheça o projeto</a>
+      <p class="dica">Dica: passe o mouse (ou toque) nas estrelas e na lua do céu. Elas levam até cada parte do site.</p>
+    </div>
+  </header>
+
+  <section id="sugestao" class="band-sky">
+    <h2>Sugestão de hoje</h2>
+    <p>Toda vez que você entra, escolhemos um filme, uma série, uma animação, um anime ou um livro para você.</p>
+    <div class="pick" aria-live="polite"><small id="pk-tipo"></small><span class="big" id="pk-titulo"></span><p id="pk-nota"></p><div class="lk" id="pk-lk"></div></div>
+    <button class="btn" id="pk-outra" type="button">Outra sugestão</button>
+  </section>
+
+  <section id="danca">
+    <h2>Descubra um novo estilo de dança</h2>
+    <p>Toque no botão e conheça um estilo. Curta os que você gostou e as próximas sugestões ficam mais parecidas com o seu gosto.</p>
+    <div class="pick cv" id="dn-pick" aria-live="polite"></div>
+    <button class="btn" id="dn-outra" type="button">Descobrir outro estilo</button>
+  </section>
+
+  <section id="arte" class="band-navy">
+    <h2>Arte e fotografia</h2>
+    <p>Conheça artistas e fotógrafos, curta os que você gosta e receba sugestões parecidas. Você também pode guardar as suas fotos e pinturas.</p>
+    <div class="tabs" id="ar-tabs"></div>
+    <div id="ar-box"></div>
+  </section>
+
+  <section id="sobre">
+    <h2>Sobre o projeto</h2>
+    <div class="two"><div>
+    <p>Hoje a tecnologia está presente em tudo: na forma como nos comunicamos, consumimos conteúdo e buscamos informação. Com tantos sites e aplicativos, ficou fácil acessar qualquer assunto, mas também ficou difícil encontrar manifestações artísticas em um lugar só.</p>
+    <p>O MovArt nasceu da experiência do nosso próprio grupo. Cada integrante gosta de um tipo de arte, e a convivência nos fez conhecer e apreciar estilos que antes não faziam parte dos nossos interesses. A arte une as pessoas, e queremos levar isso para uma plataforma.</p>
+    <p>Nossa proposta também valoriza a cultura e a diversidade do Brasil, que não tem uma cultura só, mas várias.</p>
+    </div>
+    <aside class="quote"><svg aria-hidden="true"><use href="st.html"/></svg>A arte une as pessoas, e queremos levar isso para uma plataforma.<small>Ideia central do MovArt</small></aside></div>
+  </section>
+
+  <section id="problema">
+    <h2>O problema</h2>
+    <p>Para encontrar música, dança, pintura, fotografia ou arte urbana, é preciso usar várias plataformas diferentes. Muitos serviços têm recursos pagos, exigem a instalação de vários aplicativos e ocupam espaço no celular.</p>
+    <p>Isso é pouco prático, principalmente para jovens que querem rapidez e facilidade no dia a dia. <strong>Nosso objetivo</strong> é oferecer uma experiência simples, intuitiva e acessível, sem precisar de várias plataformas separadas.</p>
+  </section>
+
+  <section id="areas" class="band-navy">
+    <h2>Quatro formas de expressão</h2>
+    <div class="grid three">
+      <div class="card a"><h3>Arte</h3><p>Artes visuais para conhecer, se inspirar e mostrar as suas próprias produções.</p></div>
+      <div class="card m"><h3>Música</h3><p>Estilos e artistas para descobrir, de acordo com o que você gosta ou quer experimentar.</p></div>
+      <div class="card d"><h3>Dança</h3><p>Diferentes ritmos e movimentos, para assistir, aprender e praticar.</p></div>
+    </div>
+  </section>
+
+  <section id="listas">
+    <h2>Listas</h2>
+    <p>Escolha uma categoria e veja indicações para descobrir.</p>
+    <div class="tabs" id="tabs"></div>
+    <input class="busca" id="busca" type="search" placeholder="Buscar nesta lista" aria-label="Buscar nesta lista">
+    <p id="lnota"></p>
+    <ul class="list" id="lista"></ul>
+    <p><a id="mais" target="_blank" rel="noopener">Não achou? Pesquise mais na internet</a></p>
+    <h3 style="margin-top:32px">Onde assistir</h3>
+    <p>Clique no nome de qualquer título para saber mais no Google. O botão "Onde assistir" mostra em quais streamings ele está agora. Você também pode abrir um streaming direto:</p>
+    <div class="lk" id="stream"></div>
+  </section>
+
+  <section id="generos" class="band-sky">
+    <h2>Catálogo por gênero</h2>
+    <p>Escolha um gênero e veja indicações de filmes. Em GL e BL há também séries e animes.</p>
+    <div class="tabs" id="gens"></div>
+    <ul class="list" id="gl"></ul>
+    <p><a id="gmais" target="_blank" rel="noopener"></a></p>
+  </section>
+
+  <section id="prateleira">
+    <h2>Minha prateleira</h2>
+    <p>Monte um perfil com o que você curte: filmes, séries, desenhos, livros e músicas. Seus amigos veem a sua prateleira usando o seu código.</p>
+    <div class="form" style="max-width:640px">
+      <input class="busca" id="p-nome" placeholder="Seu nome" maxlength="30" aria-label="Seu nome">
+      <div class="linha">
+        <select class="busca" id="p-verbo" aria-label="O que você está fazendo"><option>assistindo</option><option>lendo</option><option>ouvindo</option><option>jogando</option></select>
+        <input class="busca" id="p-status" placeholder="Agora estou… (ex.: Stranger Things)" maxlength="60" aria-label="O que você está curtindo agora">
+      </div>
+      <div class="linha">
+        <select class="busca" id="p-cat" aria-label="Categoria"></select>
+        <input class="busca" id="p-item" list="p-dl" placeholder="Adicionar à prateleira" maxlength="60" aria-label="Título">
+        <datalist id="p-dl"></datalist>
+        <button class="btn" id="p-add" type="button">Adicionar</button>
+      </div>
+      <div class="temas" id="p-temas" role="group" aria-label="Cor do cartão"></div>
+    </div>
+    <div id="meu"></div>
+    <p id="p-msg" role="status"></p>
+    <button class="btn" id="p-copiar" type="button">Copiar código da minha prateleira</button>
+    <h3 style="margin-top:40px">Match: ver a prateleira de um amigo</h3>
+    <p>Peça o código ao seu amigo e cole aqui. O site compara as duas prateleiras e mostra o quanto vocês combinam.</p>
+    <div class="form">
+      <textarea class="busca" id="p-cod" rows="3" placeholder="Cole o código aqui" aria-label="Código do amigo"></textarea>
+      <button class="btn" id="p-ver" type="button">Ver prateleira</button>
+    </div>
+    <div id="amigo"></div>
+  </section>
+
+  <section id="quiz" class="band-navy">
+    <h2>O que curtir agora?</h2>
+    <p>Responda o quiz e receba uma sugestão de filme, série, anime, desenho, livro ou música.</p>
+    <div id="quiz-box"></div>
+  </section>
+
+  <section id="musica">
+    <h2>Música</h2>
+    <p>Escolha um estilo e descubra artistas.</p>
+    <div class="tabs" id="mgens"></div>
+    <ul class="list" id="ml"></ul>
+    <p><a id="mmais" target="_blank" rel="noopener"></a></p>
+  </section>
+
+  <section id="mural" class="band-sky">
+    <h2>Meu mural</h2>
+    <p>Guarde fotos e comentários sobre o que você curtiu. Fica salvo só neste aparelho, e ninguém mais vê.</p>
+    <div class="form">
+      <input class="busca" id="m-nome" placeholder="Seu nome" maxlength="30" aria-label="Seu nome">
+      <textarea class="busca" id="m-txt" rows="3" placeholder="Escreva um comentário" maxlength="300" aria-label="Comentário"></textarea>
+      <input id="m-foto" type="file" accept="image/*" aria-label="Escolher foto">
+      <button class="btn" id="m-enviar" type="button">Publicar</button>
+    </div>
+    <p id="m-msg" role="status"></p>
+    <p><small>Para um mural compartilhado entre todos, o site precisa de um banco de dados online (próxima etapa do projeto).</small></p>
+    <div id="m-lista"></div>
+  </section>
+
+  <section id="como">
+    <h2>Como funciona</h2>
+    <ol class="steps">
+      <li><strong>Descubra:</strong> explore listas de filmes, séries, animes, livros, música, dança e arte em um só lugar.</li>
+      <li><strong>Monte a sua prateleira:</strong> guarde o que você curte e mostre o que está assistindo, lendo ou ouvindo agora.</li>
+      <li><strong>Compartilhe:</strong> envie o código da sua prateleira a um amigo e veja o quanto vocês combinam.</li>
+    </ol>
+  </section>
+
+  <section id="futuro" class="band-navy">
+    <h2>O que vem depois</h2>
+    <div class="grid two">
+      <div class="card"><h3>Novas áreas</h3><p>Teatro, cinema e fotografia.</p></div>
+      <div class="card"><h3>Mais interação</h3><p>Galeria compartilhada: todos publicam fotos e pinturas, curtem e comentam, com seguidores e notificações.</p></div>
+      <div class="card"><h3>Recomendações</h3><p>Inteligência artificial para sugerir conteúdos e desafios de acordo com cada interesse.</p></div>
+      <div class="card"><h3>Portfólio artístico</h3><p>O perfil do usuário virando um portfólio para novos talentos serem descobertos.</p></div>
+      <div class="card"><h3>Match entre pessoas</h3><p>Encontrar quem tem os mesmos gostos que você, com perfis online e conversa dentro da plataforma.</p></div>
+      <div class="card"><h3>Integração com streamings</h3><p>Conectar com Spotify e outros serviços para preencher a prateleira automaticamente.</p></div>
+    </div>
+  </section>
+
+  <section id="conclusao">
+    <h2>Conclusão</h2>
+    <p>O MovArt propõe unir tecnologia, criatividade e arte em um único ambiente digital. O projeto colocou em prática o que aprendemos no curso de Análise e Desenvolvimento de Sistemas: planejamento, levantamento de requisitos, criação das interfaces, banco de dados e testes.</p>
+    <p>Mais do que uma aplicação, o MovArt mostra que um sistema também pode estimular a expressão e a participação das pessoas, aproximando os jovens da arte de um jeito interativo e dinâmico.</p>
+  </section>
+
+  <section id="equipe" class="band-sky">
+    <h2>Desenvolvedores</h2>
+    <div class="team"><span>João Vitor</span><span>Heloisa</span><span>Allan</span><span>Nicolly</span></div>
+  </section>
+
+  <footer>Trabalho de Conclusão de Curso · E.E. Antônio Vieira Campos · 2026</footer>
+</div>
+<script>
+var TIPO=["Filme","Série","Animação","Livro","Música","Anime"];
+var D=[
+["Filmes",[
+["Parasita","2019, suspense e crítica social","sp"],["O Auto da Compadecida","2000, comédia brasileira","gf"],["Central do Brasil","1998, drama brasileiro","te"],["Cidade de Deus","2002, drama brasileiro","ep"],["Interestelar","2014, ficção científica","eap"],["Ainda Estou Aqui","2024, drama brasileiro","tep"],["À Procura da Felicidade","2006, superação","tef"],["A Culpa é das Estrelas","2014, romance","tre"],["Diário de uma Paixão","2004, romance","rt"],["Titanic","1997, romance e tragédia","rte"],["Extraordinário","2017, superação e amizade","etf"],["Forrest Gump","1994, drama e humor","etfp"],["Coringa","2019, drama e suspense","sp"],["Corra!","2017, terror e suspense","ms"],["Invocação do Mal","2013, terror","m"],["Um Lugar Silencioso","2018, terror e suspense","ms"],["Ilha do Medo","2010, suspense","sm"],["Seven: Os Sete Crimes Capitais","1995, suspense","s"],["Jumanji","1995, aventura e comédia","ag"],["Piratas do Caribe: A Maldição do Pérola Negra","2003, aventura","ag"],["O Senhor dos Anéis: A Sociedade do Anel","2001, fantasia e aventura","ae"],["Escola de Rock","2003, comédia musical","gf"],["Mamma Mia!","2008, musical e romance","grf"],["Se Beber, Não Case!","2009, comédia","g"]]],
+["Séries",[
+["Stranger Things","ficção científica e mistério","sa"],["La Casa de Papel","assalto e suspense","sa"],["Round 6","suspense e crítica social","sp"],["Breaking Bad","drama e crime","sp"],["Todo Mundo Odeia o Chris","comédia","gf"],["This Is Us","drama familiar","te"],["Friends","comédia e romance","gfr"],["Black Mirror","tecnologia e suspense","psm"],["Wandinha","comédia e mistério","gs"],["Bridgerton","romance de época","r"]]],
+["Desenhos",[
+["A Viagem de Chihiro","animação japonesa, fantasia","aep"],["Homem-Aranha no Aranhaverso","animação, aventura","aeg"],["Divertida Mente","animação sobre emoções","tegf"],["Coco","animação sobre música e família","tef"],["Avatar: A Lenda de Aang","série animada de aventura","ae"],["Up: Altas Aventuras","animação, aventura e emoção","teaf"],["Your Name","animação japonesa, romance","ret"],["Toy Story 3","animação, amizade","teg"],["Shrek","animação, comédia","gf"],["O Túmulo dos Vagalumes","animação japonesa, drama","t"],["WALL-E","animação, ficção científica","rpa"],["O Rei Leão","animação clássica","te"],["Procurando Nemo","animação, aventura","agf"]]],
+["Livros",[
+["Dom Casmurro","Machado de Assis","p"],["Memórias Póstumas de Brás Cubas","Machado de Assis","gp"],["Capitães da Areia","Jorge Amado","tep"],["A Hora da Estrela","Clarice Lispector","tp"],["Quarto de Despejo","Carolina Maria de Jesus","tp"],["O Pequeno Príncipe","Antoine de Saint-Exupéry","tpf"],["Harry Potter e a Pedra Filosofal","J. K. Rowling","af"],["A Culpa é das Estrelas","John Green","tre"],["O Diário de Anne Frank","Anne Frank","tep"],["A Menina que Roubava Livros","Markus Zusak","te"],["Orgulho e Preconceito","Jane Austen","rg"],["1984","George Orwell","ps"],["O Código Da Vinci","Dan Brown","sa"],["It: A Coisa","Stephen King","ms"],["Coraline","Neil Gaiman","ma"],["Percy Jackson e o Ladrão de Raios","Rick Riordan","agf"]]],
+["Música",[
+["Tim Maia","soul e funk brasileiro","fr"],["Legião Urbana","rock nacional","tep"],["Djavan","MPB","rp"],["Marisa Monte","MPB e pop","rf"],["Racionais MC's","rap nacional","pe"],["Caetano Veloso","MPB e tropicália","p"],["Gilberto Gil","MPB e samba","fp"],["Cazuza","rock e poesia","tp"],["The Beatles","rock clássico","fr"],["Queen","rock clássico","ef"],["Michael Jackson","rei do pop","fe"],["Beyoncé","pop e R&B","ef"],["Taylor Swift","pop","rt"],["Anitta","pop e funk brasileiro","fg"],["Marília Mendonça","sertanejo","tr"],["Emicida","rap nacional","pe"],["Djonga","rap nacional","pe"],["BTS","k-pop","fe"],["BLACKPINK","k-pop","fe"],["Stray Kids","k-pop","ea"],["Ivete Sangalo","axé","fg"],["Daniela Mercury","axé","fg"],["Aline Barros","gospel","f"],["Fernandinho","gospel","ep"],["Ramones","punk","eag"],["Green Day","punk rock","ea"],["Sex Pistols","punk","ea"],["Bob Marley","reggae","fpr"],["Elis Regina","MPB","tp"],["Billie Eilish","pop alternativo","tsm"],["Adele","pop e soul","t"],["Daft Punk","eletrônica","fa"],["Nirvana","grunge","tpm"],["Ana Castela","sertanejo","fg"],["Luan Santana","sertanejo","rf"],["Matuê","trap","ea"],["Bad Bunny","reggaeton","fe"],["Dua Lipa","pop","fe"],["The Weeknd","R&B e pop","tr"],["Metallica","heavy metal","ea"],["Zé Vaqueiro","piseiro","fg"]]],
+["Anime",[
+["Naruto","ninjas, amizade e superação","aef"],["Dragon Ball Z","lutas e aventura","aeg"],["One Piece","piratas e aventura","aefg"],["Attack on Titan","ação e suspense","sat"],["Death Note","suspense psicológico","sp"],["Demon Slayer","ação e emoção","aet"],["My Hero Academia","super-heróis","aef"],["Fullmetal Alchemist: Brotherhood","aventura e drama","aetp"],["Jujutsu Kaisen","ação e sobrenatural","asm"],["Cavaleiros do Zodíaco","clássico da TV","ae"],["Pokémon","aventura e amizade","afg"],["Tokyo Ghoul","terror e drama","mts"],["Hunter x Hunter","aventura e estratégia","aes"],["Spy x Family","comédia e família","gfr"],["One Punch Man","comédia e ação","ga"],["Your Lie in April","romance e música","rte"],["Violet Evergarden","drama e emoção","tre"],["Fruits Basket","romance e comédia","rgt"],["Haikyu!!","esporte e superação","aef"],["Chainsaw Man","ação e terror","am"],["Sword Art Online","aventura e romance","ar"],["Bleach","ação e sobrenatural","ae"]]],
+["Fotografia",[
+["Sebastião Salgado","fotógrafo brasileiro, preto e branco","brasil preto-e-branco documental"],["Vivian Maier","fotografia de rua","rua preto-e-branco"],["Henri Cartier-Bresson","o momento decisivo","rua preto-e-branco europa"],["Steve McCurry","retratos e viagens","retrato viagem cor"],["Ansel Adams","paisagens","paisagem preto-e-branco"],["Annie Leibovitz","retratos","retrato cor"],["Robert Doisneau","cenas de Paris","rua preto-e-branco europa"],["Dorothea Lange","fotografia documental","documental preto-e-branco"],["Claudia Andujar","retratos e povos indígenas","brasil documental retrato"],["Pierre Verger","Bahia e cultura afro-brasileira","brasil preto-e-branco documental"],["Diane Arbus","retratos marcantes","retrato preto-e-branco"],["Cássio Vasconcellos","cidades e vistas de cima","brasil paisagem cor"]]],
+["Arte",[
+["Tarsila do Amaral","Abaporu","brasil modernismo pintura"],["Candido Portinari","Retirantes","brasil modernismo pintura social"],["Anita Malfatti","modernismo brasileiro","brasil modernismo pintura"],["Di Cavalcanti","Cinco Moças de Guaratinguetá","brasil modernismo pintura"],["Romero Britto","pop art brasileira","brasil pop-art colorido"],["Beatriz Milhazes","pintura colorida contemporânea","brasil colorido contemporanea"],["Eduardo Kobra","murais coloridos","brasil arte-urbana colorido"],["Os Gêmeos","grafite brasileiro","brasil arte-urbana colorido"],["Vik Muniz","obras feitas com materiais inusitados","brasil contemporanea fotografia"],["Vincent van Gogh","A Noite Estrelada","pos-impressionismo pintura europa"],["Claude Monet","Nenúfares","impressionismo pintura europa"],["Leonardo da Vinci","Mona Lisa","renascimento pintura europa"],["Pablo Picasso","Guernica","cubismo pintura europa"],["Salvador Dalí","A Persistência da Memória","surrealismo pintura europa"],["Frida Kahlo","autorretratos","surrealismo mexico pintura"],["Andy Warhol","latas de sopa Campbell","pop-art colorido"],["Jean-Michel Basquiat","neoexpressionismo","arte-urbana pintura"],["Banksy","arte de rua","arte-urbana social"],["Yayoi Kusama","bolinhas e instalações","colorido contemporanea"],["Katsushika Hokusai","A Grande Onda de Kanagawa","japao gravura"]]],
+["Girls Love (GL)",[
+["Retrato de uma Jovem em Chamas","filme francês, 2019, romance de época","rte","filme"],["Carol","filme, 2015, romance","rt","filme"],["Desobediência","filme, 2017, drama","tp","filme"],["The L Word","série americana, 2004","rgt","série"],["Feel Good","série britânica, 2020, comédia romântica","rgt","série"],["GAP The Series","série tailandesa, 2022, romance","rf","série"],["Bloom Into You","anime, 2018, romance escolar","rt","anime"],["Adachi e Shimamura","anime, 2020, romance escolar","rtf","anime"],["Sweet Blue Flowers","anime, 2009, romance escolar","rt","anime"],["Revolutionary Girl Utena","anime, 1997, fantasia","ape","anime"]]],
+["Boys Love (BL)",[
+["Heartstopper","série britânica, 2022, romance adolescente","rfg","série"],["Young Royals","série sueca, 2021, drama e romance","rte","série"],["Love, Simon","filme, 2018, comédia romântica","rfg","filme"],["Me Chame pelo Seu Nome","filme, 2017, romance","rte","filme"],["O Segredo de Brokeback Mountain","filme, 2005, drama","tep","filme"],["2gether: The Series","série tailandesa, 2020, comédia romântica","rfg","série"],["Bad Buddy","série tailandesa, 2021, romance","rgf","série"],["Cherry Magic!","série japonesa, 2020, comédia romântica","rfg","série"],["Semantic Error","série sul-coreana, 2022, romance","rg","série"],["Given","anime, 2019, música e romance","rte","anime"],["Sasaki e Miyano","anime, 2022, romance escolar","rfg","anime"],["Doukyuusei (Classmates)","anime, filme de 2016, romance escolar","rt","anime"],["Yuri!!! on Ice","anime, 2016, patinação e romance","aef","anime"]]],
+["Dança",[
+["Ballet clássico","técnica e elegância","classica europa tecnica"],["Hip hop","street dance","urbana street"],["Passinho","dança do funk carioca","brasil urbana funk"],["Samba no pé","dança brasileira","brasil tradicional"],["Forró","dança a dois nordestina","brasil tradicional casal"],["Zouk","dança a dois, popular no Brasil","brasil casal"],["Dança contemporânea","expressão livre","expressao classica"],["Jazz dance","energia e teatro musical","teatro energia"],["Breaking","breakdance, esporte olímpico desde Paris 2024","urbana street esporte"],["K-pop dance","coreografias de grupos coreanos","asia pop coreografia"],["Frevo","dança do carnaval de Pernambuco","brasil tradicional carnaval"],["Capoeira","luta, dança e música","brasil tradicional luta"],["Tango","dança argentina","latina casal"],["Salsa","dança latina","latina casal"],["Flamenco","dança espanhola","europa tradicional"],["Bollywood","dança dos filmes indianos","asia cinema"]]]
+];
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
+function rnd(a){return a[Math.floor(Math.random()*a.length)]}
+var CORES=["#BFDDF2","#8EC5E8","#F5CB47","#DCEBF7"];
+function capa(t){var h=0,i;for(i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))%997;
+  var w=t.replace(/\(.*\)/,"").split(" ").filter(function(x){return x.length>2});
+  var c=el("div","capa",((w[0]||t).charAt(0)+(w[1]||"").charAt(0)).toUpperCase());
+  c.style.background=CORES[h%4];c.setAttribute("aria-hidden","true");return c}
+var KIND=["filme","série","desenho animado","livro","música","anime","fotógrafo","artista","girls love","boys love","dança"];
+function gq(q){return "https://www.google.com/search?q="+encodeURIComponent(q)}
+function LK(c,t,k){var e=encodeURIComponent(t);
+  if(c===4)return{main:"https://open.spotify.com/search/"+e,extra:[["Spotify","https://open.spotify.com/search/"+e],["YouTube Music","https://music.youtube.com/search?q="+e],["Apple Music","https://music.apple.com/br/search?term="+e],["Amazon Music","https://music.amazon.com/search/"+e],["Deezer","https://www.deezer.com/search/"+e],["YouTube","https://www.youtube.com/results?search_query="+encodeURIComponent(t+" músicas")],["Sobre",gq(t+" cantor banda")]]};
+  if(c===6||c===7){var w=c===6?" fotografias":" obras";return{main:gq(t+" "+KIND[c]),extra:[["Ver no Pinterest","https://www.pinterest.com/search/pins/?q="+encodeURIComponent(t+w)],["Imagens no Google","https://www.google.com/search?tbm=isch&q="+encodeURIComponent(t+w)]]}}
+  if(c===10)return{main:gq(t+" dança"),extra:[["Assistir no YouTube","https://www.youtube.com/results?search_query="+encodeURIComponent(t+" dança")],["Aulas para iniciantes","https://www.youtube.com/results?search_query="+encodeURIComponent("aula de "+t+" para iniciantes")]]};
+  if(c===3)return{main:gq(t+" livro"),extra:[["Comprar ou ler",gq(t+" livro comprar")]]};
+  return{main:gq(t+" "+(k||KIND[c])),extra:[["Onde assistir","https://www.justwatch.com/br/busca?q="+e],["Trailer","https://www.youtube.com/results?search_query="+encodeURIComponent(t+" trailer")]]}}
+function ab(x,t,c){var a=el("a",c||"",t);a.href=x;a.target="_blank";a.rel="noopener";return a}
+function tit(t,L,tag,cls){var b=el(tag||"b",cls||"");if(L)b.appendChild(ab(L.main,t));else b.textContent=t;return b}
+function chips(L){var d=el("div","lk");L.extra.forEach(function(x){d.appendChild(ab(x[1],x[0],"chip"))});return d}
+function item(tag,t,n,cv,L){var li=el("li"),d=li;
+  if(cv){li.className="cv";li.appendChild(capa(t));d=el("div");li.appendChild(d)}
+  if(tag)d.appendChild(el("small","",tag));d.appendChild(tit(t,L));if(n)d.appendChild(el("span","",n));if(L)d.appendChild(chips(L));return li}
+
+/* sugestão a cada visita */
+var pool=[];
+[0,1,2,3,5].forEach(function(c){D[c][1].forEach(function(i){pool.push([TIPO[c],i[0],i[1],c])})});
+function sugerir(){var p=rnd(pool),L=LK(p[3],p[1]);
+  document.getElementById("pk-tipo").textContent=p[0];
+  var t=document.getElementById("pk-titulo");t.textContent="";t.appendChild(ab(L.main,p[1]));
+  document.getElementById("pk-nota").textContent=p[2];
+  var k=document.getElementById("pk-lk");k.textContent="";L.extra.forEach(function(x){k.appendChild(ab(x[1],x[0],"chip"))})}
+document.getElementById("pk-outra").onclick=sugerir;sugerir();
+
+/* listas com busca */
+var tabs=document.getElementById("tabs"),lista=document.getElementById("lista"),busca=document.getElementById("busca"),mais=document.getElementById("mais"),cur=0;
+function mostrar(n){
+  if(n!==undefined)cur=n;
+  Array.prototype.forEach.call(tabs.children,function(b){b.setAttribute("aria-pressed",+b.dataset.n===cur)});
+  var q=busca.value.trim().toLowerCase();
+  var it=D[cur][1].filter(function(i){return (i[0]+" "+i[1]).toLowerCase().indexOf(q)>-1});
+  document.getElementById("lnota").textContent=(cur===8||cur===9)?"Antes de assistir, confira a classificação indicativa de cada título.":"";
+  lista.textContent="";
+  if(!it.length)lista.appendChild(el("li","","Nada encontrado nesta lista."));
+  it.forEach(function(i){lista.appendChild(item("",i[0],i[1],(cur<6||cur>7),LK(cur,i[0],i[3])))});
+  mais.href="https://www.google.com/search?q="+encodeURIComponent(D[cur][0]+" "+(q||"indicações"))}
+D.forEach(function(c,n){if(n===6||n===7||n===10)return;var b=el("button","tab",c[0]);b.type="button";b.dataset.n=n;b.onclick=function(){mostrar(n)};tabs.appendChild(b)});
+busca.oninput=function(){mostrar()};
+mostrar(0);
+
+
+/* streamings */
+[["Netflix","https://www.netflix.com/br/"],["Prime Video","https://www.primevideo.com/"],["Disney+","https://www.disneyplus.com/pt-br"],["HBO Max (antigo Max)","https://www.hbomax.com/br/pt"],["Globoplay","https://globoplay.globo.com/"],["Apple TV+","https://tv.apple.com/br"],["Crunchyroll (animes)","https://www.crunchyroll.com/pt-br"],["YouTube","https://www.youtube.com/"]].forEach(function(x){document.getElementById("stream").appendChild(ab(x[1],x[0],"chip"))});
+
+/* catálogo por gênero */
+var G=[
+["Comédia",["Se Beber, Não Case! (2009)","Escola de Rock (2003)","O Auto da Compadecida (2000)","Minha Mãe é uma Peça (2013)","A Máscara (1994)","Débi & Lóide (1994)","Superbad (2007)"]],
+["Suspense",["Parasita (2019)","Seven: Os Sete Crimes Capitais (1995)","Ilha do Medo (2010)","O Silêncio dos Inocentes (1991)","Garota Exemplar (2014)","Prisioneiros (2013)"]],
+["Terror",["Invocação do Mal (2013)","Corra! (2017)","Um Lugar Silencioso (2018)","O Exorcista (1973)","It: A Coisa (2017)","Bird Box (2018)","A Bruxa (2015)"]],
+["Ação",["Mad Max: Estrada da Fúria (2015)","John Wick (2014)","Duro de Matar (1988)","Tropa de Elite (2007)","Batman: O Cavaleiro das Trevas (2008)","Vingadores: Ultimato (2019)","Missão: Impossível, Efeito Fallout (2018)"]],
+["Aventura",["Jumanji (1995)","Piratas do Caribe: A Maldição do Pérola Negra (2003)","Indiana Jones: Os Caçadores da Arca Perdida (1981)","O Senhor dos Anéis: A Sociedade do Anel (2001)","Jurassic Park (1993)","Náufrago (2000)"]],
+["Ficção científica",["Interestelar (2014)","Matrix (1999)","De Volta para o Futuro (1985)","Blade Runner 2049 (2017)","Star Wars: Uma Nova Esperança (1977)","A Origem (2010)","Ex Machina (2014)","Duna (2021)"]],
+["Romance",["A Culpa é das Estrelas (2014)","Diário de uma Paixão (2004)","Titanic (1997)","Orgulho e Preconceito (2005)","La La Land (2016)","Como Eu Era Antes de Você (2016)","Antes do Amanhecer (1995)"]],
+["Drama",["Central do Brasil (1998)","Cidade de Deus (2002)","Ainda Estou Aqui (2024)","À Procura da Felicidade (2006)","Forrest Gump (1994)","Um Sonho de Liberdade (1994)","A Vida é Bela (1997)"]],
+["Fantasia",["Harry Potter e a Pedra Filosofal (2001)","As Crônicas de Nárnia: O Leão, a Feiticeira e o Guarda-Roupa (2005)","O Labirinto do Fauno (2006)","Alice no País das Maravilhas (2010)","A Princesa Prometida (1987)"]],
+["Animação",["A Viagem de Chihiro (2001)","Homem-Aranha no Aranhaverso (2018)","Divertida Mente (2015)","Coco (2017)","Up: Altas Aventuras (2009)","Toy Story (1995)","Shrek (2001)","O Rei Leão (1994)","Procurando Nemo (2003)","Your Name (2016)"]],
+["Musical",["La La Land (2016)","Mamma Mia! (2008)","O Rei do Show (2017)","Moulin Rouge! (2001)","Grease (1978)","Bohemian Rhapsody (2018)","Cantando na Chuva (1952)"]],
+["Crime",["O Poderoso Chefão (1972)","Pulp Fiction (1994)","Os Infiltrados (2006)","Bons Companheiros (1990)","Tropa de Elite (2007)","Cidade de Deus (2002)"]],
+["Guerra e história",["1917 (2019)","O Resgate do Soldado Ryan (1998)","A Lista de Schindler (1993)","Dunkirk (2017)","Gladiador (2000)","Bastardos Inglórios (2009)"]],
+["Família",["Esqueceram de Mim (1990)","Matilda (1996)","Extraordinário (2017)","Paddington 2 (2017)","A Fantástica Fábrica de Chocolate (2005)"]],
+["Documentário",["O Sal da Terra (2014)","Amy (2015)","Senna (2010)","Jiro Sonha com Sushi (2011)","Meu Amigo, o Polvo (2020)"]]
+];
+G.push(["Girls Love (GL)",D[8][1].map(function(i){return i[0]+"|"+i[3]})],["Boys Love (BL)",D[9][1].map(function(i){return i[0]+"|"+i[3]})]);
+var gens=document.getElementById("gens"),gl=document.getElementById("gl"),gmais=document.getElementById("gmais");
+function genero(n){
+  Array.prototype.forEach.call(gens.children,function(b,i){b.setAttribute("aria-pressed",i===n)});
+  gl.textContent="";
+  G[n][1].forEach(function(t){var pr=t.split("|"),nm=pr[0].replace(/\s*\(\d{4}\)\s*$/,"");gl.appendChild(item("",pr[0],"",true,LK(0,nm,pr[1])))});
+  var mix=n>=15;gmais.textContent=mix?"Pesquisar mais títulos de "+G[n][0]:"Pesquisar mais filmes de "+G[n][0].toLowerCase();
+  gmais.href="https://www.google.com/search?q="+encodeURIComponent(mix?"melhores filmes e séries "+G[n][0]:"melhores filmes de "+G[n][0])}
+G.forEach(function(g,n){var b=el("button","tab",g[0]);b.type="button";b.onclick=function(){genero(n)};gens.appendChild(b)});
+genero(0);
+
+/* quiz */
+var QT=[["Filme",0],["Série",1],["Anime",5],["Desenho",2],["Livro",3],["Música",4],["GL (Girls Love)",8],["BL (Boys Love)",9]];
+var Q=[
+["Como você está se sentindo?",[["Animado","g"],["Com energia","a"],["Sensível","t"],["Apaixonado","r"],["Curioso","s"],["Tranquilo","f"]]],
+["Com quem você vai curtir isso?",[["Sozinho","p"],["Com amigos","g"],["Com a família","f"],["Com alguém especial","r"]]],
+["Que clima você quer?",[["Feliz","f"],["Épico","a"],["Emocionante","e"],["Surpreendente","s"],["Que faz pensar","p"]]],
+["Qual dessas cenas combina com você agora?",[["Uma perseguição","a"],["Uma piada","g"],["Um beijo","r"],["Um susto","m"],["Uma despedida","t"],["Um mistério","s"]]],
+["O que você quer sentir?",[["Rir","g"],["Chorar","t"],["Medo","m"],["Ficar sem ar de tanta emoção","e"],["Me animar","f"],["Refletir","p"]]]
+];
+var MN={t:"triste e emocional",e:"emocionante",g:"engraçado",r:"romântico",m:"de terror",a:"de aventura",s:"de suspense",f:"leve, pra animar",p:"pra pensar"};
+var box=document.getElementById("quiz-box"),pts,qi,alvo,cat;
+function iniciar(){pts={};qi=0;categoria()}
+function categoria(){
+  box.textContent="";
+  box.appendChild(el("span","big","O que você quer curtir agora?"));
+  var o=el("div","opts");
+  QT.forEach(function(t){var b=el("button","opt",t[0]);b.type="button";b.onclick=function(){cat=t[1];qi=0;pts={};pergunta()};o.appendChild(b)});
+  box.appendChild(o)}
+function pergunta(){
+  box.textContent="";var q=Q[qi];
+  box.appendChild(el("p","","Pergunta "+(qi+1)+" de "+Q.length));
+  box.appendChild(el("span","big",q[0]));
+  var o=el("div","opts");
+  q[1].forEach(function(a){var b=el("button","opt",a[0]);b.type="button";b.onclick=function(){pts[a[1]]=(pts[a[1]]||0)+1;qi++;if(qi<Q.length)pergunta();else{var k=Object.keys(pts),m=Math.max.apply(null,k.map(function(x){return pts[x]}));alvo=rnd(k.filter(function(x){return pts[x]===m}));resultado()}};o.appendChild(b)});
+  box.appendChild(o)}
+function resultado(){
+  var lst=D[cat][1],c=lst.filter(function(i){return i[2]&&i[2].indexOf(alvo)>-1});
+  if(!c.length)c=lst;
+  var p=rnd(c),L=LK(cat,p[0],p[3]),nome=QT.filter(function(t){return t[1]===cat})[0][0].toLowerCase();
+  box.textContent="";
+  box.appendChild(el("p","","Pelo que você respondeu, hoje o clima é "+MN[alvo]+". Sua sugestão de "+nome+":"));
+  var w=el("div","pick cv");w.appendChild(capa(p[0]));var d=el("div");d.appendChild(tit(p[0],L,"span","big"));d.appendChild(el("p","",p[1]));d.appendChild(chips(L));w.appendChild(d);box.appendChild(w);
+  var o=el("button","btn","Outra sugestão");o.type="button";o.onclick=resultado;
+  var m=el("button","btn","Mudar categoria");m.type="button";m.onclick=categoria;m.style.marginLeft="10px";
+  var r=el("button","btn","Refazer o quiz");r.type="button";r.onclick=iniciar;r.style.margin="10px 0 0 0";
+  box.appendChild(o);box.appendChild(m);box.appendChild(document.createElement("br"));box.appendChild(r)}
+iniciar();
+
+/* música */
+var MU=[
+["Populares",["Taylor Swift","Bad Bunny","Dua Lipa","Sabrina Carpenter","The Weeknd","Billie Eilish","Ana Castela","Henrique & Juliano","Jorge & Mateus","Zé Neto & Cristiano","Matuê","Anitta","Marília Mendonça","BTS","Luan Santana"]],
+["Rock",["Legião Urbana","Queen","The Beatles","Nirvana","Charlie Brown Jr.","Paralamas do Sucesso"]],
+["Pop",["Taylor Swift","Dua Lipa","Billie Eilish","Sabrina Carpenter","Olivia Rodrigo","Ariana Grande","Beyoncé","Michael Jackson","Anitta","Marisa Monte","Bruno Mars","Lady Gaga"]],
+["MPB",["Caetano Veloso","Gilberto Gil","Djavan","Elis Regina","Chico Buarque","Milton Nascimento"]],
+["Rap e hip hop",["Racionais MC's","Emicida","Djonga","Criolo","Eminem","Kendrick Lamar"]],
+["Sertanejo",["Ana Castela","Luan Santana","Henrique & Juliano","Zé Neto & Cristiano","Maiara & Maraisa","Simone Mendes","Jorge & Mateus","Gusttavo Lima","Marília Mendonça","Chitãozinho & Xororó","Zezé Di Camargo & Luciano","Leandro & Leonardo"]],
+["Funk",["Ludmilla","MC Ryan SP","MC Cabelinho","MC Hariel","Kevin O Chris","Livinho","MC Kevinho","Claudinho & Buchecha","Tati Quebra Barraco"]],
+["Samba e pagode",["Cartola","Zeca Pagodinho","Beth Carvalho","Alcione","Exaltasamba","Grupo Revelação"]],
+["Eletrônica",["Alok","Vintage Culture","Daft Punk","Avicii","Calvin Harris"]],
+["Reggae",["Bob Marley","Natiruts","Cidade Negra","Ziggy Marley"]],
+["Jazz",["Miles Davis","Louis Armstrong","Ella Fitzgerald","Billie Holiday","John Coltrane"]],
+["Clássica",["Beethoven","Mozart","Bach","Chopin","Vivaldi"]],
+["K-pop",["BTS","BLACKPINK","Stray Kids","TWICE","NewJeans","SEVENTEEN","EXO","Red Velvet","ITZY"]],
+["Axé",["Ivete Sangalo","Claudia Leitte","Daniela Mercury","Chiclete com Banana","Bell Marques","Olodum","Timbalada"]],
+["Gospel",["Aline Barros","Fernandinho","Gabriela Rocha","Thalles Roberto","Bruna Karla","Diante do Trono","Cassiane","Isaias Saad"]],
+["Punk",["Ramones","Sex Pistols","The Clash","Green Day","Ratos de Porão","Cólera","Bad Religion","Blink-182"]],
+["Forró e piseiro",["Luiz Gonzaga","Dominguinhos","Falamansa","Wesley Safadão","Xand Avião","Barões da Pisadinha","Natanzinho Lima","Mari Fernandez","Zé Vaqueiro","Ávine Vinny"]],
+["Pagode",["Thiaguinho","Ferrugem","Menos é Mais","Sorriso Maroto","Péricles","Dilsinho","Zeca Pagodinho","Exaltasamba","Grupo Revelação"]],
+["Trap",["Matuê","Teto","Veigh","Filipe Ret","Xamã","L7NNON","Travis Scott","Future"]],
+["R&B e soul",["SZA","Rihanna","Frank Ocean","The Weeknd","Alicia Keys","Usher","Stevie Wonder","Marvin Gaye","Amy Winehouse","Tim Maia"]],
+["Reggaeton e latina",["Bad Bunny","Karol G","J Balvin","Daddy Yankee","Shakira","Ozuna","Rauw Alejandro","Maluma","Luis Fonsi"]],
+["Heavy metal",["Metallica","Iron Maiden","Black Sabbath","Slipknot","Sepultura","Angra","Megadeth","AC/DC","Ozzy Osbourne"]],
+["Indie e alternativo",["Arctic Monkeys","Tame Impala","Lana Del Rey","Radiohead","The 1975","The Strokes","Cigarettes After Sex","Clairo"]],
+["Country",["Johnny Cash","Dolly Parton","Morgan Wallen","Luke Combs","Zach Bryan","Shania Twain","Kacey Musgraves"]],
+["Blues",["B.B. King","Muddy Waters","Robert Johnson","Eric Clapton","Stevie Ray Vaughan"]],
+["Bossa nova",["João Gilberto","Tom Jobim","Vinicius de Moraes","Nara Leão","Toquinho","Roberto Menescal","Astrud Gilberto"]],
+["J-pop",["YOASOBI","Ado","Kenshi Yonezu","LiSA","Utada Hikaru","Official HIGE DANdism","Aimyon"]]
+];
+var mg=document.getElementById("mgens"),ml=document.getElementById("ml"),mm=document.getElementById("mmais");
+function estilo(n){
+  Array.prototype.forEach.call(mg.children,function(b,i){b.setAttribute("aria-pressed",i===n)});
+  ml.textContent="";MU[n][1].forEach(function(t){ml.appendChild(item("",t,"",true,LK(4,t)))});
+  if(n===0){mm.textContent="Ver o que está em alta agora: Top 50 Brasil no Spotify";mm.href="https://open.spotify.com/search/Top%2050%20Brasil"}
+  else{mm.textContent="Pesquisar mais artistas de "+MU[n][0].toLowerCase();mm.href="https://www.google.com/search?q="+encodeURIComponent("melhores artistas de "+MU[n][0])}}
+MU.forEach(function(g,n){var b=el("button","tab",g[0]);b.type="button";b.onclick=function(){estilo(n)};mg.appendChild(b)});
+estilo(0);
+
+/* mural (salvo neste aparelho) */
+var KEY="movart-mural",posts=[],msg=document.getElementById("m-msg");
+try{posts=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){posts=[]}
+function salvar(){try{localStorage.setItem(KEY,JSON.stringify(posts));return true}catch(e){return false}}
+function desenhar(){var bx=document.getElementById("m-lista");bx.textContent="";
+  if(!posts.length)bx.appendChild(el("p","","Ainda não há publicações. Seja o primeiro!"));
+  posts.forEach(function(p,i){var d=el("div","post");d.appendChild(el("small","",p.n));
+    if(p.f){var im=new Image();im.src=p.f;im.alt="Foto enviada por "+p.n;d.appendChild(im)}
+    if(p.t)d.appendChild(el("p","",p.t));
+    var b=el("button","tab","Apagar");b.type="button";b.onclick=function(){posts.splice(i,1);salvar();desenhar()};d.appendChild(b);bx.appendChild(d)})}
+function reduzir(file,cb){var r=new FileReader();r.onload=function(){var im=new Image();
+  im.onload=function(){var k=Math.min(1,480/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",0.7))};
+  im.onerror=function(){cb("")};im.src=r.result};r.readAsDataURL(file)}
+document.getElementById("m-enviar").onclick=function(){
+  var n=document.getElementById("m-nome").value.trim()||"Anônimo",t=document.getElementById("m-txt").value.trim(),fi=document.getElementById("m-foto");
+  if(!t&&!fi.files[0]){msg.textContent="Escreva um comentário ou escolha uma foto.";return}
+  function fim(f){posts.unshift({n:n,t:t,f:f});if(posts.length>30)posts.pop();
+    if(salvar()){msg.textContent="Publicado!";document.getElementById("m-txt").value="";fi.value=""}
+    else{posts.shift();msg.textContent="Não foi possível salvar. Tente uma foto menor."}
+    desenhar()}
+  if(fi.files[0])reduzir(fi.files[0],fim);else fim("")};
+desenhar();
+
+/* minha prateleira */
+var TEMAS=["#BFDDF2","#F5CB47","#8EC5E8","#F6C1B8","#CFC3F3"],TN=["Azul claro","Amarelo","Azul","Rosa","Lilás"],NC=6,VB=["assistindo","lendo","ouvindo","jogando"];
+function T(v,n){return String(v==null?"":v).slice(0,n)}
+function limpar(o){o=o||{};var t=o.tema|0;
+  return{nome:T(o.nome,30),verbo:VB.indexOf(o.verbo)>-1?o.verbo:VB[0],status:T(o.status,60),tema:t>=0&&t<TEMAS.length?t:0,
+  itens:(Array.isArray(o.itens)?o.itens:[]).slice(0,80).map(function(x){var c=x.c|0;return{c:c>=0&&c<NC?c:0,t:T(x.t,60),d:+x.d||Date.now()}}).filter(function(x){return x.t})}}
+var P=limpar(null),PK="movart-prateleira";
+try{P=limpar(JSON.parse(localStorage.getItem(PK)||"{}"))}catch(e){}
+function guardar(){try{localStorage.setItem(PK,JSON.stringify(P));return true}catch(e){return false}}
+function montar(d,cont,edit){
+  cont.textContent="";
+  var card=el("div","pcard");card.style.setProperty("--tc",TEMAS[d.tema]);
+  card.appendChild(el("h3","",d.nome||"Sua prateleira"));
+  card.appendChild(el("p","",d.status?"Agora: "+d.verbo+" "+d.status:"Conte o que você está curtindo agora."));
+  var st=el("div","stats"),cnt=[],i;
+  for(i=0;i<NC;i++){cnt.push(d.itens.filter(function(x){return x.c===this},i).length)}
+  st.appendChild(el("span","",d.itens.length+" itens"));
+  D.slice(0,NC).forEach(function(c,k){if(cnt[k])st.appendChild(el("span","",c[0]+" "+cnt[k]))});
+  card.appendChild(st);
+  var sem=d.itens.filter(function(x){return Date.now()-x.d<6048e5}),tp=0;
+  if(sem.length){var w=[0,0,0,0,0,0];sem.forEach(function(x){w[x.c]++});tp=w.indexOf(Math.max.apply(null,w));
+    card.appendChild(el("p","","Resumo da semana: "+sem.length+" novo(s) item(ns). Mais presente: "+D[tp][0]+"."))}
+  card.appendChild(st);cont.appendChild(card);
+  D.slice(0,NC).forEach(function(c,k){
+    var its=d.itens.filter(function(x){return x.c===k});if(!its.length)return;
+    cont.appendChild(el("h3","pcat",c[0]));
+    var row=el("div","rowc");
+    its.forEach(function(it){var b=el("div","sh");b.appendChild(capa(it.t));b.appendChild(tit(it.t,LK(it.c,it.t)));
+      if(edit){var x=el("button","","×");x.type="button";x.setAttribute("aria-label","Remover "+it.t);x.onclick=function(){d.itens.splice(d.itens.indexOf(it),1);guardar();desenhaMeu()};b.appendChild(x)}
+      row.appendChild(b)});
+    cont.appendChild(row)});
+  if(d.itens.length){cont.appendChild(el("h3","pcat","Linha do tempo"));
+    var ul=el("ul","list");
+    d.itens.slice().sort(function(a,b){return b.d-a.d}).slice(0,12).forEach(function(x){ul.appendChild(item("",x.t,D[x.c][0]+", "+new Date(x.d).toLocaleDateString("pt-BR"),false,LK(x.c,x.t)))});
+    cont.appendChild(ul)}}
+function desenhaMeu(){montar(P,document.getElementById("meu"),true)}
+var pn=document.getElementById("p-nome"),pv=document.getElementById("p-verbo"),ps=document.getElementById("p-status"),pc=document.getElementById("p-cat"),pi=document.getElementById("p-item"),pdl=document.getElementById("p-dl"),pm=document.getElementById("p-msg");
+pn.value=P.nome;pv.value=P.verbo;ps.value=P.status;
+D.slice(0,NC).forEach(function(c,k){var o=el("option","",c[0]);o.value=k;pc.appendChild(o)});
+function preencher(){pdl.textContent="";D[+pc.value][1].forEach(function(i){var o=document.createElement("option");o.value=i[0];pdl.appendChild(o)})}
+pc.onchange=preencher;preencher();
+pn.oninput=function(){P.nome=T(pn.value.trim(),30);guardar();desenhaMeu()};
+pv.onchange=function(){P.verbo=pv.value;guardar();desenhaMeu()};
+ps.oninput=function(){P.status=T(ps.value.trim(),60);guardar();desenhaMeu()};
+document.getElementById("p-add").onclick=function(){
+  var t=T(pi.value.trim(),60),c=+pc.value;
+  if(!t){pm.textContent="Escreva ou escolha um título.";return}
+  if(P.itens.some(function(x){return x.c===c&&x.t.toLowerCase()===t.toLowerCase()})){pm.textContent="Este item já está na sua prateleira.";return}
+  P.itens.unshift({c:c,t:t,d:Date.now()});pi.value="";
+  pm.textContent=guardar()?"Adicionado à sua prateleira!":"Não foi possível salvar neste aparelho.";desenhaMeu()};
+var pt=document.getElementById("p-temas");
+TEMAS.forEach(function(cor,k){var b=el("button","tema");b.type="button";b.style.background=cor;b.setAttribute("aria-label","Cor "+TN[k]);b.onclick=function(){P.tema=k;guardar();marcar();desenhaMeu()};pt.appendChild(b)});
+function marcar(){Array.prototype.forEach.call(pt.children,function(b,k){b.setAttribute("aria-pressed",k===P.tema)})}
+marcar();desenhaMeu();
+function codigo(){return btoa(unescape(encodeURIComponent(JSON.stringify(P))))}
+document.getElementById("p-copiar").onclick=function(){
+  var c=codigo();
+  function plano(){var a=document.getElementById("p-cod");a.value=c;a.select();pm.textContent="Copie o código que apareceu na caixa abaixo e envie para o seu amigo."}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(c).then(function(){pm.textContent="Código copiado! Envie para o seu amigo."},plano)}else plano()};
+function kx(x){return x.c+"|"+x.t.trim().toLowerCase()}
+function matchCard(d){
+  var box=el("div","pcard");box.style.setProperty("--tc","#FBC4BA");
+  var a=P.itens,b=d.itens;
+  box.appendChild(el("h3","","Match"));
+  if(!a.length||!b.length){box.appendChild(el("p","","Para ver o match, os dois precisam ter itens na prateleira."));return box}
+  var ka={},kb={},comuns=[],ca={},cb={},i,inter=0,uni=0;
+  a.forEach(function(x){ka[kx(x)]=1;ca[x.c]=1});
+  b.forEach(function(x){kb[kx(x)]=1;cb[x.c]=1;if(ka[kx(x)]&&!comuns.some(function(y){return kx(y)===kx(x)}))comuns.push(x)});
+  for(i=0;i<NC;i++){if(ca[i]&&cb[i])inter++;if(ca[i]||cb[i])uni++}
+  var pct=Math.round(Math.min(1,comuns.length/Math.min(a.length,b.length))*70+(uni?inter/uni:0)*30);
+  var rot=pct>=70?"Match perfeito!":pct>=40?"Ótimo match!":pct>=15?"Vocês têm coisas em comum.":"Gostos bem diferentes: uma chance de descobrir novidades.";
+  box.appendChild(el("p","",(P.nome||"Você")+" e "+(d.nome||"seu amigo")+": "+pct+"% de match. "+rot));
+  var st=el("div","stats");st.appendChild(el("span","",comuns.length+" em comum"));box.appendChild(st);
+  var w=el("div");
+  if(comuns.length){w.appendChild(el("h3","pcat","Vocês dois curtem"));var u=el("ul","list");comuns.slice(0,10).forEach(function(x){u.appendChild(item("",x.t,D[x.c][0],false,LK(x.c,x.t)))});w.appendChild(u)}
+  var novos=b.filter(function(x){return !ka[kx(x)]}).slice(0,3);
+  if(novos.length){w.appendChild(el("h3","pcat","Que tal experimentar do seu amigo"));var u2=el("ul","list");novos.forEach(function(x){u2.appendChild(item("",x.t,D[x.c][0],false,LK(x.c,x.t)))});w.appendChild(u2)}
+  box.appendChild(w);
+  var msg="Dei "+pct+"% de match com você no MovArt!"+(comuns.length?" Temos em comum: "+comuns.slice(0,5).map(function(x){return x.t}).join(", ")+".":"")+" Bora conversar sobre isso?";
+  var z=ab("https://wa.me/?text="+encodeURIComponent(msg),"Conversar no WhatsApp","btn");z.style.marginTop="16px";box.appendChild(z);
+  return box}
+document.getElementById("p-ver").onclick=function(){
+  var am=document.getElementById("amigo");
+  try{var d=limpar(JSON.parse(decodeURIComponent(escape(atob(document.getElementById("p-cod").value.trim())))));montar(d,am,false);am.insertBefore(matchCard(d),am.firstChild);pm.textContent=""}
+  catch(e){am.textContent="";pm.textContent="Código inválido. Peça para o seu amigo copiar de novo."}};
+
+/* curtidas, sugestões, dança, arte e fotografia */
+var CK="movart-curtidas",CURT={};
+try{var cc=JSON.parse(localStorage.getItem(CK)||"{}");if(cc&&typeof cc==="object"&&!Array.isArray(cc))CURT=cc}catch(e){CURT={}}
+function salvaC(){try{localStorage.setItem(CK,JSON.stringify(CURT))}catch(e){}}
+function tg(i){return(i[2]||"").split(" ").filter(Boolean)}
+function pontos(){var sc={};[6,7,10].forEach(function(c){D[c][1].forEach(function(i){if(CURT[c+"|"+i[0]])tg(i).forEach(function(t){sc[t]=(sc[t]||0)+1})})});return sc}
+function likeBtn(c,i){var k=c+"|"+i[0],on=!!CURT[k],b=el("button","like",on?"♥ Curtido":"♡ Curtir");b.type="button";b.setAttribute("aria-pressed",on);b.setAttribute("aria-label",(on?"Descurtir ":"Curtir ")+i[0]);
+  b.onclick=function(){if(CURT[k])delete CURT[k];else CURT[k]=1;salvaC();renderArte();renderDanca(true)};return b}
+function itemC(c,i,tag,nota){var li=item(tag||"",i[0],nota||i[1],true,LK(c,i[0]));li.querySelector(".lk").appendChild(likeBtn(c,i));return li}
+function recs(){var sc=pontos(),out=[];
+  [6,7,10].forEach(function(c){D[c][1].forEach(function(i){if(CURT[c+"|"+i[0]])return;var n=0,why=[];tg(i).forEach(function(t){if(sc[t]){n+=sc[t];why.push(t)}});if(n>0)out.push({c:c,i:i,n:n,why:why})})});
+  out.sort(function(a,b){return b.n-a.n});return out}
+
+/* dança */
+var dnAtual=null,dnBox=document.getElementById("dn-pick");
+function renderDanca(manter){var L=D[10][1];
+  if(!manter||!dnAtual){var sc=pontos(),tot=0,pes=L.map(function(i){var w=1;tg(i).forEach(function(t){w+=(sc[t]||0)*2});tot+=w;return w}),r=Math.random()*tot,k=0;
+    for(;k<L.length-1;k++){r-=pes[k];if(r<=0)break}
+    if(L[k]===dnAtual&&L.length>1)k=(k+1)%L.length;dnAtual=L[k]}
+  var i=dnAtual,ln=LK(10,i[0]);dnBox.textContent="";
+  dnBox.appendChild(capa(i[0]));
+  var d=el("div");d.appendChild(tit(i[0],ln,"span","big"));d.appendChild(el("p","",i[1]));var ch=chips(ln);ch.appendChild(likeBtn(10,i));d.appendChild(ch);dnBox.appendChild(d)}
+document.getElementById("dn-outra").onclick=function(){renderDanca(false)};
+
+/* minhas obras (salvas só neste aparelho) */
+var OK="movart-obras",OBR=[];
+try{var oo=JSON.parse(localStorage.getItem(OK)||"[]");OBR=(Array.isArray(oo)?oo:[]).slice(0,12).map(function(x){x=x||{};return{t:T(x.t,60),k:x.k==="Pintura"?"Pintura":"Foto",f:(typeof x.f==="string"&&x.f.indexOf("data:image/")===0)?x.f:"",l:!!x.l,c:(Array.isArray(x.c)?x.c:[]).slice(0,30).map(function(z){return T(z,200)})}})}catch(e){OBR=[]}
+function salvaO(){try{localStorage.setItem(OK,JSON.stringify(OBR));return true}catch(e){return false}}
+function reduz2(file,mx,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var k=Math.min(1,mx/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.width*k));c.height=Math.max(1,Math.round(im.height*k));c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",0.72))};im.onerror=function(){cb("")};im.src=r.result};r.onerror=function(){cb("")};r.readAsDataURL(file)}
+function renderObras(box){
+  var f=el("div","form"),sel=el("select","busca"),ti=el("input","busca"),fi=el("input"),bt=el("button","btn","Adicionar obra"),ms=el("p");
+  ["Foto","Pintura"].forEach(function(v){var o=el("option","",v);o.value=v;sel.appendChild(o)});
+  sel.setAttribute("aria-label","Tipo da obra");ti.placeholder="Título da obra";ti.maxLength=60;ti.setAttribute("aria-label","Título da obra");
+  fi.type="file";fi.accept="image/*";fi.setAttribute("aria-label","Escolher imagem");bt.type="button";ms.setAttribute("role","status");
+  bt.onclick=function(){
+    if(!fi.files[0]){ms.textContent="Escolha uma imagem.";return}
+    if(OBR.length>=12){ms.textContent="O limite é de 12 obras neste aparelho. Apague uma para adicionar outra.";return}
+    reduz2(fi.files[0],640,function(d){if(!d){ms.textContent="Não foi possível ler a imagem.";return}
+      OBR.unshift({t:T(ti.value.trim(),60)||"Sem título",k:sel.value,f:d,l:false,c:[]});
+      if(!salvaO()){OBR.shift();ms.textContent="Sem espaço para salvar. Apague uma obra e tente de novo.";return}
+      renderArte()})};
+  f.appendChild(sel);f.appendChild(ti);f.appendChild(fi);f.appendChild(bt);box.appendChild(f);box.appendChild(ms);
+  box.appendChild(el("p","","Só você vê estas obras, neste aparelho. Na versão com banco de dados online, todo mundo poderá ver, curtir e comentar."));
+  OBR.forEach(function(o,idx){var d=el("div","obra");d.appendChild(el("small","",o.k));d.appendChild(el("b","",o.t));
+    if(o.f){var im=new Image();im.src=o.f;im.alt=o.k+": "+o.t;d.appendChild(im)}
+    var lk=el("button","like",o.l?"♥ Curtido (1)":"♡ Curtir");lk.type="button";lk.setAttribute("aria-pressed",o.l);lk.onclick=function(){o.l=!o.l;salvaO();renderArte()};d.appendChild(lk);
+    var ap=el("button","like","Apagar");ap.type="button";ap.style.marginLeft="8px";ap.onclick=function(){OBR.splice(idx,1);salvaO();renderArte()};d.appendChild(ap);
+    o.c.forEach(function(z){d.appendChild(el("div","cmt",z))});
+    var ci=el("input","busca");ci.placeholder="Escreva um comentário";ci.maxLength=200;ci.setAttribute("aria-label","Comentário");ci.style.marginTop="10px";
+    var cb=el("button","like","Comentar");cb.type="button";cb.style.marginTop="8px";cb.onclick=function(){var v=T(ci.value.trim(),200);if(!v)return;o.c.push(v);salvaO();renderArte()};
+    d.appendChild(ci);d.appendChild(cb);box.appendChild(d)})}
+
+/* arte e fotografia */
+var arT=0,arTabs=document.getElementById("ar-tabs"),arBox=document.getElementById("ar-box");
+["Arte","Fotografia","Para você","Minhas obras"].forEach(function(n,k){var b=el("button","tab",n);b.type="button";b.onclick=function(){arT=k;renderArte()};arTabs.appendChild(b)});
+function renderArte(){
+  Array.prototype.forEach.call(arTabs.children,function(b,k){b.setAttribute("aria-pressed",k===arT)});
+  arBox.textContent="";
+  if(arT<2){var c=arT===0?7:6,ul=el("ul","list");D[c][1].forEach(function(i){ul.appendChild(itemC(c,i))});arBox.appendChild(ul);return}
+  if(arT===3){renderObras(arBox);return}
+  var n=Object.keys(CURT).length;
+  if(!n){arBox.appendChild(el("p","","Você ainda não curtiu nada. Toque em Curtir nas abas Arte e Fotografia (ou na dança, lá em cima) e as sugestões aparecem aqui."));return}
+  var r=recs();
+  if(!r.length){arBox.appendChild(el("p","","Você curtiu "+n+" item(ns). Curta mais alguns para receber sugestões parecidas."));return}
+  arBox.appendChild(el("p","","Você curtiu "+n+" item(ns). Estas sugestões são parecidas com o que você curtiu:"));
+  var u=el("ul","list");r.slice(0,8).forEach(function(p){u.appendChild(itemC(p.c,p.i,p.c===7?"Arte":p.c===6?"Fotografia":"Dança",p.i[1]+" · parecido com o que você curtiu: "+p.why.slice(0,2).map(function(w){return w.replace(/-/g," ")}).join(", ")))});
+  arBox.appendChild(u);arBox.appendChild(el("p","","Suas curtidas ficam salvas só neste aparelho."))}
+renderDanca(false);renderArte();
+
+</script>
+</body>
+</html>

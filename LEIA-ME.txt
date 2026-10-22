@@ -1,0 +1,14 @@
+MovArt atualizado
+1. Extraia este ZIP.
+2. Abra index.html para testar.
+3. Envie os arquivos HTML para a raiz do repositório GitHub Pages.
+O menu foi simplificado e as categorias agora abrem páginas de seleção.
+
+
+Correções adicionais:
+- Listas agora abre diretamente o conteúdo original da seção Listas.
+- O card Meu mural na página de categorias abre meu-mural.html, com o conteúdo original do mural.
+- mural.html continua sendo a página de categorias com Meu mural, Minha prateleira e Quiz.
+
+
+Correção da área Listas: listas.html mantém a página de entrada com os cartões Listas e Gêneros; o cartão Listas abre lista-conteudo.html, que exibe o conteúdo original sem duplicar a página de entrada.
